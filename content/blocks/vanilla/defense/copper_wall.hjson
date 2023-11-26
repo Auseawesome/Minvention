@@ -1,4 +1,5 @@
 type: Wall
+name: copper-wall
 size: 1
 health: 25000
 requirements: [
