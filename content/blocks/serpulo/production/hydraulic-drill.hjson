@@ -2,12 +2,13 @@ type: Drill
 size: 2
 tier: 3
 drillTime: 400
+liquidBoostIntensity: 1
 liquidCapacity: 5
 itemCapacity: 10
 consumes: {
   liquid: {
     liquid: water
-    amount: 1
+    amount: 0.06
     optional: false
     booster: false
   }
