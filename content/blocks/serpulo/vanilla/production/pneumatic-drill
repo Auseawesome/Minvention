@@ -1,0 +1,5 @@
+consumes: {
+    liquid: {
+        optional: false
+    }
+}
