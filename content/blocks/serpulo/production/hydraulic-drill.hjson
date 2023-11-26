@@ -4,7 +4,6 @@ tier: 3
 drillTime: 400
 liquidCapacity: 5
 itemCapacity: 10
-region: pneumatic-drill
 consumes: {
   liquid: {
     liquid: water
