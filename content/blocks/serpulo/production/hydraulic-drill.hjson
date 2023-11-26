@@ -1,0 +1,21 @@
+type: Drill
+size: 2
+tier: 3
+drillTime: 400
+liquidCapacity: 5
+itemCapacity: 10
+region: pneumatic-drill
+consumes: {
+  liquid: {
+    liquid: water
+    amount: 1
+    optional: false
+    booster: false
+  }
+}
+category: production
+requirements: [
+  copper/18
+  graphite/10
+]
+research: graphite-press
