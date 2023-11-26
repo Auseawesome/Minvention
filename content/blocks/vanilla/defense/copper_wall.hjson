@@ -1,0 +1,8 @@
+type: Wall
+size: 1
+health: 25000
+requirements: [
+  copper/100
+]
+category: defense
+research: duo
