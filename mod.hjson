@@ -1,0 +1,9 @@
+name: minvention
+displayName: Minvention
+author: Auseawesome
+description:
+  '''
+  A WIP mod set to reinvent the way you play the mindustry campaing
+  '''
+version: 0.0.0
+minGameVersion: 146
