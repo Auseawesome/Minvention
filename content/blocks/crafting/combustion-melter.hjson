@@ -7,7 +7,7 @@ consumes : {
     minvention-snowball/10
   ]
 }
-craftTime: 2400
+craftTime: 600
 outputLiquid: water/0.12
 research: combustion-generator
 category: crafting
