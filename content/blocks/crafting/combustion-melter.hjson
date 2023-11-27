@@ -4,7 +4,7 @@ liquidCapacity: 20
 consumes : {
   items: [
     coal/1
-    minvention-snow/10
+    minvention-snowball/10
   ]
 }
 craftTime: 120
