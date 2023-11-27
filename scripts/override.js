@@ -1,3 +1,4 @@
 let drill = Blocks.pneumaticDrill;
 drill.liquidBoostIntensity = 1;
-drill.consumers = {} + new ConsumeLiquid(water, 0.6).optional(false,false)
+drill.consumers = drill.nonOptionalConsumers = [new ConsumeLiquid(Liquids.water, 0.2)];
+drill.optionalConsumers = [];
