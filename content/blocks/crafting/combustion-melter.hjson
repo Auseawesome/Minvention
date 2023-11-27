@@ -3,12 +3,12 @@ size: 1
 liquidCapacity: 20
 consumes : {
   items: [
-    coal/2
-    minvention-snowball/20
+    coal/1
+    minvention-snowball/10
   ]
 }
-craftTime: 1200
-outputLiquid: water/1
+craftTime: 2400
+outputLiquid: water/0.12
 research: combustion-generator
 category: crafting
 requirements: [
