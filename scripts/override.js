@@ -12,6 +12,5 @@ Events.on(ClientLoadEvent, e => {
     drillRequireLiquid(Blocks.laserDrill, [new ConsumeLiquid(Liquids.water, 0.08)])
     drillRequireLiquid(Blocks.blastDrill, [new ConsumeLiquid(Liquids.water, 0.1)])
     Blocks.mechanicalDrill.liquidCapacity = 0
+    Blocks.snow.itemDrop = Items.minvention-snowball
 })
-
-Blocks.snow.itemDrop = Items.minvention-snowball
