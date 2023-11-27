@@ -10,5 +10,5 @@ Events.on(ClientLoadEvent, e => {
     drillRequireLiquid(Blocks.mechanicalDrill, [])
     drillRequireLiquid(Blocks.pneumaticDrill, [new ConsumeLiquid(Liquids.water, 0.06)])
     drillRequireLiquid(Blocks.laserDrill, [new ConsumeLiquid(Liquids.water, 0.08)])
-    drillRequireLiquid(Blocks.airblastDrill, [new ConsumeLiquid(Liquids.water, 0.1)])
+    drillRequireLiquid(Blocks.blastDrill, [new ConsumeLiquid(Liquids.water, 0.1)])
 })
