@@ -1,0 +1,17 @@
+type: GenericCrafter
+size: 1
+liquidCapacity = 20
+consumes : {
+  items: [
+    coal/1
+    snow/10
+  ]
+}
+craftTime: 120
+outputLiquid: water/20
+research: combustion-generator
+category: crafting
+requirements: [
+  copper/40
+  lead/10
+]
