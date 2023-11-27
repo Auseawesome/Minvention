@@ -1,6 +1,6 @@
 type: GenericCrafter
 size: 1
-liquidCapacity = 20
+liquidCapacity: 20
 consumes : {
   items: [
     coal/1
