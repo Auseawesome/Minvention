@@ -11,4 +11,5 @@ Events.on(ClientLoadEvent, e => {
     drillRequireLiquid(Blocks.pneumaticDrill, [new ConsumeLiquid(Liquids.water, 0.06)])
     drillRequireLiquid(Blocks.laserDrill, [new ConsumeLiquid(Liquids.water, 0.08)])
     drillRequireLiquid(Blocks.blastDrill, [new ConsumeLiquid(Liquids.water, 0.1)])
+    Blocks.mechanicalDrill.liquidCapacity = 0
 })
