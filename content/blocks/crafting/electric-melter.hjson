@@ -1,0 +1,17 @@
+type: GenericCrafter
+size: 1
+liquidCapacity: 20
+consumes : {
+  items: [
+    minvention-ice/1
+  ]
+}
+craftTime: 150
+outputLiquid: water/0.6
+research: minvention-combustion-generator
+category: crafting
+requirements: [
+  copper/100
+  lead/40
+  graphite/20
+]
