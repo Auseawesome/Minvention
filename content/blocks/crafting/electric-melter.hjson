@@ -2,6 +2,7 @@ type: GenericCrafter
 size: 2
 liquidCapacity: 100
 consumes : {
+  power: 60
   items: [
     minvention-ice/1
   ]
