@@ -14,4 +14,7 @@ Events.on(ClientLoadEvent, e => {
     Blocks.mechanicalDrill.liquidCapacity = 0
 
     Blocks.snow.itemDrop = Vars.content.item("minvention-snowball")
+    Blocks.iceSnow.itemDrop = Vars.content.item("minvention-ice")
+    Blocks.redIce.itemDrop = Vars.content.item("minvention-ice")
+    Blocks.ice.itemDrop = Vars.content.item("minvention-ice")
 })
