@@ -1,4 +1,6 @@
-let drill = Blocks.pneumaticDrill;
-drill.liquidBoostIntensity = 1;
-drill.consumers = drill.nonOptionalConsumers = [new ConsumeLiquid(Liquids.water, 0.2)];
-drill.optionalConsumers = [];
+Events.on(ClientLoadEvent, e => {
+    let drill = Blocks.pneumaticDrill;
+    drill.liquidBoostIntensity = 1;
+    drill.consumers = drill.nonOptionalConsumers = [new ConsumeLiquid(Liquids.water, 0.2)];
+    drill.optionalConsumers = [];
+})
