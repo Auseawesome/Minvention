@@ -4,7 +4,7 @@ import arc.graphics.Color;
 import mindustry.content.Items;
 import mindustry.type.Item;
 
-public class UAWItems {
+public class MinventionItems {
 	public static Item placeholder,
 	// Natural
 	snow, ice;

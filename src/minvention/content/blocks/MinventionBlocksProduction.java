@@ -1,5 +1,6 @@
 package minvention.content.blocks;
 
+import minvention.content.*;
 import arc.graphics.Color;
 import arc.struct.Seq;
 import mindustry.content.*;
@@ -12,7 +13,10 @@ import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.*;
 import multicraft.*;
 
-public class UAWBlocksProduction {
+import static mindustry.Vars.tilesize;
+import static mindustry.type.ItemStack.with;
+
+public class MinventionBlocksProduction {
 	public static Block placeholder,
 	// Drills
 
@@ -37,9 +41,10 @@ public class UAWBlocksProduction {
 			consumeItems(
 				new ItemStack(MinventionItems.snow, 3)
 			);
-			outputItem = new ItemStack(
-				UAWItems.stoutsteel, 3
+			outputLiquid = new LiquidStack(
+				Liquids.water, 0.1f
 			);
+        }};
 
         electricMelter = new MultiCrafter("electric-melter") {{
             requirements(Category.crafting, with(
@@ -56,33 +61,29 @@ public class UAWBlocksProduction {
             resolvedRecipes = Seq.with(
                 new Recipe() {{
                     input = new IOEntry() {{
-                        items = ItemStack.with(
-                            MinventionItems.snow, 1
-                        );
-                        power = 1
+                        Seq.with(ItemStack.with(MinventionItems.snow, 1));
+                        Seq.with();
+                        power = 1;
                     }};
                     output = new IOEntry() {{
-                        items = FluidStack.with(
-                            Liquids.water, 0.5f
-                        );
+                        Seq.with();
+                        Seq.with(LiquidStack.with(Liquids.water, 0.5f));
                     }};
                     craftTime = 120f;
                 }},
                 new Recipe() {{
                     input = new IOEntry() {{
-                        items = ItemStack.with(
-                            MinventionItems.ice, 1
-                        );
+                        Seq.with(ItemStack.with(MinventionItems.ice, 1));
+                        Seq.with();
                         power = 2;
                     }};
                     output = new IOEntry() {{
-                        items = FluidStack.with(
-                            Liquids.water, 0.5f
-                        );
+                        Seq.with();
+                        Seq.with(LiquidStack.with(Liquids.water, 0.5f));
                     }};
                     craftTime = 600f;
                 }}
             );
-        }}
+        }};
     }
 }
