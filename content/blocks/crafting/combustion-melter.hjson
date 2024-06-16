@@ -8,7 +8,7 @@ consumes : {
   ]
 }
 craftTime: 600
-outputLiquid: water/0.12
+outputLiquid: water/0.1
 research: combustion-generator
 category: crafting
 requirements: [
