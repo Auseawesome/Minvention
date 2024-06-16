@@ -4,9 +4,9 @@ liquidCapacity: 100
 recipes: [
   {
     input: {
-      items: {
+      items: [
         minvention-snowball/1
-      }
+      ]
       power: 1
     },
     output: {
