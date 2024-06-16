@@ -17,7 +17,7 @@
     sectorSize: 1,
     clearSectorOnLose: true,
     allowSectorInvasion: false,
-    radius: 1,
+    radius: 2,
     hiddenItems: [],
     mesh: {}
 }
