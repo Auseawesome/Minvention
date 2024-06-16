@@ -1,14 +1,36 @@
-type: GenericCrafter
+type: multicraft.MultiCrafter
 size: 2
 liquidCapacity: 100
-consumes : {
-  power: 1
-  items: [
-    minvention-ice/1
-  ]
-}
-craftTime: 150
-outputLiquid: water/0.6
+recipes: [
+  {
+    input: {
+      items: {
+        minvention-snowball/1
+      }
+      power: 1
+    },
+    output: {
+      fluids: [
+        water/0.1
+      ]
+    }
+    craftTime: 120
+  }
+  {
+    input: {
+      items: {
+        minvention-ice/1
+      }
+      power: 2
+    },
+    output: {
+      fluids: [
+        water/0.5
+      ]
+    }
+    craftTime: 600
+  }
+]
 research: minvention-combustion-generator
 category: crafting
 requirements: [

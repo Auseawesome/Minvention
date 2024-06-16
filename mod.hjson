@@ -3,7 +3,8 @@ displayName: Minvention
 author: Auseawesome
 description:
   '''
-  A WIP mod set to reinvent the way you play the mindustry campaing
+  A WIP mod set to reinvent the way you play the mindustry campaign
   '''
 version: 0.0.0
 minGameVersion: 146
+dependencies: ["multi-crafter"]
