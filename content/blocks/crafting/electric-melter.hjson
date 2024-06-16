@@ -11,7 +11,7 @@ recipes: [
     },
     output: {
       fluids: [
-        water/0.1
+        water/0.5
       ]
     }
     craftTime: 120
