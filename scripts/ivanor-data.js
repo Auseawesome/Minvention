@@ -1,3 +1,5 @@
 Events.on(ClientLoadEvent, e => {
-    Vars.content.planet("ivanor").hiddenItems.addAll(Items.erekirItems).removeAll(Items.serpuloItems);
+    Vars.content.planet("ivanor").techTree = nodeRoot("erekir", coreShard, true, () => {
+
+    })
 });
