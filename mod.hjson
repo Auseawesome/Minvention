@@ -1,10 +1,15 @@
-name: minvention
-displayName: Minvention
-author: Auseawesome
-description:
-  '''
-  A WIP mod set to reinvent the way you play the mindustry campaign
-  '''
+displayName: "Minvention"
+
+name: "minvention"
+
+author: "Auseawesome"
+
+main: "minvention.MinventionMod"
+
+description: "Adds a planet called Ivanor. What Serpulo could've been"
+
 version: 0.0.0
+
 minGameVersion: 146
-dependencies: ["multi-crafter"]
+
+java: true
