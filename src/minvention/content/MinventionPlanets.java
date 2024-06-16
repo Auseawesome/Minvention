@@ -10,7 +10,7 @@ import mindustry.game.*;
 import mindustry.graphics.*;
 import mindustry.graphics.g3d.*;
 import mindustry.graphics.g3d.PlanetGrid.*;
-import mindustry.maps.planet.*;
+import minvention.maps.planet.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
@@ -21,7 +21,7 @@ public class MinventionPlanets{
 
     public static void load() {
         ivanor = new Planet("ivanor", Planets.sun, 1f, 3) {{
-            generator = new SerpuloPlanetGenerator();
+            generator = new IvanorPlanetGenerator();
             meshLoader = () -> new HexMesh(this, 6);
             cloudMeshLoader = () -> new MultiMesh(
                 new HexSkyMesh(this, 11, 0.15f, 0.13f, 5, new Color().set(Pal.spore).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f),
