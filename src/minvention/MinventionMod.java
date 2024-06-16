@@ -20,6 +20,7 @@ public class MinventionMod extends Mod{
 	public void loadContent() {
 		MinventionItems.load();
 		MinventionBlocks.load();
+        MinventionPlanets.load();
 	}
 
 }
