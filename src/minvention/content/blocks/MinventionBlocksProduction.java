@@ -60,27 +60,27 @@ public class MinventionBlocksProduction {
 
             resolvedRecipes = Seq.with(
                 new Recipe() {{
-                    input = new IOEntry() {{
-                        Seq.with(ItemStack.with(MinventionItems.snow, 1));
-                        Seq.with();
-                        power = 1;
-                    }};
-                    output = new IOEntry() {{
-                        Seq.with();
-                        Seq.with(LiquidStack.with(Liquids.water, 0.5f));
-                    }};
+                    input = new IOEntry(
+                        Seq.with(ItemStack.with(MinventionItems.snow, 1)),
+                        Seq.with(),
+                        1f
+                    );
+                    output = new IOEntry(
+                        Seq.with(),
+                        Seq.with(LiquidStack.with(Liquids.water, 0.5f))
+                    );
                     craftTime = 120f;
                 }},
                 new Recipe() {{
-                    input = new IOEntry() {{
-                        Seq.with(ItemStack.with(MinventionItems.ice, 1));
-                        Seq.with();
-                        power = 2;
-                    }};
-                    output = new IOEntry() {{
-                        Seq.with();
-                        Seq.with(LiquidStack.with(Liquids.water, 0.5f));
-                    }};
+                    input = new IOEntry(
+                        Seq.with(ItemStack.with(MinventionItems.ice, 1)),
+                        Seq.with(),
+                        2f
+                    );
+                    output = new IOEntry(
+                        Seq.with(),
+                        Seq.with(LiquidStack.with(Liquids.water, 0.5f))
+                    );
                     craftTime = 600f;
                 }}
             );
