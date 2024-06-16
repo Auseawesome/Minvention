@@ -5,7 +5,7 @@ import mindustry.content.Items;
 import mindustry.type.Item;
 
 public class MinventionItems {
-	public static Item placeholder,
+	public static Item
 	// Natural
 	snow, ice;
     

@@ -17,7 +17,7 @@ import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
 public class MinventionBlocksProduction {
-	public static Block placeholder,
+	public static Block
 	// Drills
 
 	// Melters
