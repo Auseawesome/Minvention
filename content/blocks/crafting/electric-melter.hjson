@@ -18,9 +18,9 @@ recipes: [
   }
   {
     input: {
-      items: {
+      items: [
         minvention-ice/1
-      }
+      ]
       power: 2
     },
     output: {
