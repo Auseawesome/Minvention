@@ -19,6 +19,7 @@ public class MinventionMod extends Mod{
     @Override
 	public void loadContent() {
 		MinventionItems.load();
+        MinventionLiquids.load();
 		MinventionBlocks.load();
         MinventionPlanets.load();
 	}
