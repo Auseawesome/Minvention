@@ -24,7 +24,7 @@ public class FilterGenericCrafter extends GenericCrafter {
 		if (hasItems) {
 			addBar("efficiency", (FilterGenericCrafterBuild entity) ->
 				new Bar(
-					() -> Core.bundle.format("bar.uaw-item-efficiency", (int) (entity.itemMultProgress() * 100)),
+					() -> Core.bundle.format("bar.minvention-item-efficiency", (int) (entity.itemMultProgress() * 100)),
 					() -> adaptiveBarColor ? entity.itemColor() : Pal.lightOrange,
 					entity::itemMultProgress
 				));

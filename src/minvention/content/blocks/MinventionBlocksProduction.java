@@ -1,8 +1,13 @@
 package minvention.content.blocks;
 
+import minvention.world.drawer.DrawBoilerSmoke;
+import minvention.audiovisual.MinventionPal;
 import minvention.content.*;
+import minvention.world.blocks.production.steam.AttributeSteamBoiler;
+import minvention.world.blocks.production.steam.SteamBoiler;
 import arc.graphics.Color;
 import arc.struct.Seq;
+import arc.util.*;
 import mindustry.content.*;
 import mindustry.entities.effect.*;
 import mindustry.gen.Sounds;
@@ -11,8 +16,10 @@ import mindustry.type.*;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.*;
+import mindustry.world.meta.Attribute;
 import multicraft.*;
 
+import static minvention.Vars.*;
 import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
@@ -21,10 +28,14 @@ public class MinventionBlocksProduction {
 	// Drills
 
 	// Melters
-	combustionMelter, electricMelter;
+	combustionMelter, electricMelter,
+
+    // Steam Production
+    steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler;
 
     public static void load() {
 
+        // Melters
         combustionMelter = new GenericCrafter("combustion-melter") {{
 			requirements(Category.crafting, with(
 				Items.copper, 40,
@@ -85,5 +96,114 @@ public class MinventionBlocksProduction {
                 }}
             );
         }};
+
+        // Steam Production
+        steamKettle = new SteamBoiler("steam-kettle") {{
+			requirements(Category.crafting, with(
+				Items.copper, 12,
+				Items.lead, 12
+			));
+			size = 1;
+
+			float steamOutput = 0.25f;
+			consumeLiquid(Liquids.water, steamOutput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			liquidCapacity = 180f;
+
+			squareSprite = false;
+			drawer = new DrawMulti(
+				new DrawDefault(),
+				new DrawWarmupRegion(),
+				new DrawBoilerSmoke() {{
+					size = 1.5f;
+					particles = 18;
+					lifetime = 150f;
+					spreadRadius = 3f;
+				}}
+			);
+
+		}};
+		industrialBoiler = new SteamBoiler("industrial-boiler") {{
+			requirements(Category.crafting, with(
+				Items.copper, 55,
+				Items.graphite, 35,
+				Items.silicon, 35,
+				Items.lead, 35
+			));
+			size = 2;
+
+			float steamOutput = 0.5f;
+			consumeLiquid(Liquids.water, steamOutput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			liquidCapacity = steamKettle.liquidCapacity * 2;
+
+			squareSprite = false;
+			drawer = new DrawMulti(
+				new DrawDefault(),
+				new DrawWarmupRegion() {{
+					sinMag = 0.4f;
+					sinScl = sinMag * 15f;
+				}},
+				new DrawBoilerSmoke() {{
+					particles = 28;
+					lifetime = 160f;
+					size = 2.5f;
+					spreadRadius = 5f;
+				}}
+			);
+		}};
+		pressureBoiler = new SteamBoiler("pressure-boiler") {{
+			requirements(Category.crafting, with(
+				Items.copper, 125,
+				Items.lead, 100,
+				Items.titanium, 85,
+				Items.metaglass, 65,
+				Items.silicon, 65,
+				Items.graphite, 60
+			));
+			size = 4;
+
+			float steamOutput = 2f;
+			consumeLiquid(Liquids.water, steamOutput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			liquidCapacity = steamKettle.liquidCapacity * 4;
+
+			squareSprite = false;
+			drawer = new DrawMulti(
+				new DrawDefault(),
+				new DrawGlowRegion() {{
+					glowScale = 3f;
+					color = MinventionPal.drawGlowOrange;
+				}},
+				new DrawBoilerSmoke() {{
+					particles = 40;
+					lifetime = 210f;
+					size = 5f;
+					spreadRadius = 14f;
+				}}
+			);
+		}};
+		geothermalBoiler = new AttributeSteamBoiler("geothermal-boiler") {{
+			requirements(Category.crafting, with(
+				Items.copper, 70,
+				Items.graphite, 45,
+				Items.silicon, 40,
+				Items.lead, 50,
+				Items.metaglass, 30
+			));
+			size = 3;
+			updateEffect = Fx.steam;
+			drawer = new DrawMulti(
+				new DrawDefault(),
+				new DrawGlowRegion() {{
+					glowScale = 3f;
+					color = MinventionPal.drawGlowOrange;
+				}}
+			);
+			attribute = Attribute.heat;
+			float steamOutput = 1.5f;
+			consumeLiquid(Liquids.water, steamOutput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+		}};
     }
 }
