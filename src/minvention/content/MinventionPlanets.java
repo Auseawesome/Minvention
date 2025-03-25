@@ -10,11 +10,14 @@ import mindustry.game.*;
 import mindustry.graphics.*;
 import mindustry.graphics.g3d.*;
 import mindustry.graphics.g3d.PlanetGrid.*;
+import mindustry.world.blocks.storage.CoreBlock;
 import minvention.maps.planet.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import mindustry.content.*;
+
+import static mindustry.Vars.content;
 
 public class MinventionPlanets{
     public static Planet ivanor;
@@ -42,6 +45,9 @@ public class MinventionPlanets{
                 r.waveTeam = Team.crux;
                 r.placeRangeCheck = false;
                 r.showSpawns = false;
+                r.blockWhitelist = true;
+                r.hideBannedBlocks = true;
+                r.bannedBlocks.addAll(MinventionBlocks.ivanorBlocks);
             };
             iconColor = Color.valueOf("7d4dff");
             atmosphereColor = Color.valueOf("3c1b8f");
@@ -50,7 +56,8 @@ public class MinventionPlanets{
             startSector = 0;
             alwaysUnlocked = true;
             landCloudColor = Pal.spore.cpy().a(0.5f);
-            hiddenItems.addAll(Items.erekirItems).removeAll(Items.serpuloItems);
+            hiddenItems.addAll(Items.erekirItems).addAll(Items.serpuloItems).removeAll(MinventionItems.ivanorItems);
+
         }};
     }
 }

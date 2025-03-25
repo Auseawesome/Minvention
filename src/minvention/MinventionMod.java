@@ -22,6 +22,8 @@ public class MinventionMod extends Mod{
         MinventionLiquids.load();
 		MinventionBlocks.load();
         MinventionPlanets.load();
+
+        IvanorTechTree.load();
 	}
 
 }

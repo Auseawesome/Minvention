@@ -205,5 +205,6 @@ public class MinventionBlocksProduction {
 			consumeLiquid(Liquids.water, steamOutput);
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
 		}};
+		MinventionBlocks.ivanorBlocks.addAll(new Block[]{combustionMelter, electricMelter, steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler});
     }
 }
