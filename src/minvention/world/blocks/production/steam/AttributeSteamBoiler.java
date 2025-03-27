@@ -1,9 +1,9 @@
 package minvention.world.blocks.production.steam;
 
-import minvention.world.blocks.production.AttributeFilterCrafter;
+import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.meta.Stat;
 
-public class AttributeSteamBoiler extends AttributeFilterCrafter {
+public class AttributeSteamBoiler extends AttributeCrafter {
 	public AttributeSteamBoiler(String name) {
 		super(name);
 		warmupSpeed = 0.0025f;
@@ -16,11 +16,14 @@ public class AttributeSteamBoiler extends AttributeFilterCrafter {
 		baseEfficiency = 0f;
 		boostScale = 0.25f;
 		maxBoost = 3f;
+		scaleLiquidConsumption = true;
 	}
 
-	@Override
-	public void setStats() {
-		super.setStats();
-		stats.remove(Stat.productionTime);
+	public class AttributeSteamBoilerBuild extends AttributeCrafterBuild {
+
+		@Override
+		public float efficiencyScale() {
+			return 1.0f;
+		}
 	}
 }
