@@ -102,7 +102,7 @@ public class MinventionBlocksProduction {
 
 			float baseWaterInput = 0.25f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterCrudeEff);
 			liquidCapacity = 180f;
 
 			squareSprite = false;
@@ -129,7 +129,7 @@ public class MinventionBlocksProduction {
 
 			float baseWaterInput = 0.5f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterBasicEff);
 			liquidCapacity = steamKettle.liquidCapacity * 2;
 
 			squareSprite = false;
@@ -160,7 +160,7 @@ public class MinventionBlocksProduction {
 
 			float baseWaterInput = 2f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterAdvancedEff);
 			liquidCapacity = steamKettle.liquidCapacity * 4;
 
 			squareSprite = false;
@@ -198,7 +198,7 @@ public class MinventionBlocksProduction {
 			attribute = Attribute.heat;
 			float baseWaterInput = 1.5f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterAdvancedEff);
 		}};
 		MinventionBlocks.ivanorBlocks.addAll(new Block[]{combustionMelter, electricMelter, steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler});
     }
