@@ -1,5 +1,6 @@
 package minvention.content.blocks;
 
+import minvention.world.consumers.ConsumeLiquidScaling;
 import minvention.world.drawer.DrawBoilerSmoke;
 import minvention.audiovisual.MinventionPal;
 import minvention.content.*;
@@ -100,7 +101,7 @@ public class MinventionBlocksProduction {
 			size = 1;
 
 			float baseWaterInput = 0.25f;
-			consumeLiquid(Liquids.water, baseWaterInput);
+			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = 180f;
 
@@ -127,7 +128,7 @@ public class MinventionBlocksProduction {
 			size = 2;
 
 			float baseWaterInput = 0.5f;
-			consumeLiquid(Liquids.water, baseWaterInput);
+			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = steamKettle.liquidCapacity * 2;
 
@@ -158,7 +159,7 @@ public class MinventionBlocksProduction {
 			size = 4;
 
 			float baseWaterInput = 2f;
-			consumeLiquid(Liquids.water, baseWaterInput);
+			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = steamKettle.liquidCapacity * 4;
 
@@ -196,7 +197,7 @@ public class MinventionBlocksProduction {
 			);
 			attribute = Attribute.heat;
 			float baseWaterInput = 1.5f;
-			consumeLiquid(Liquids.water, baseWaterInput);
+			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 		}};
 		MinventionBlocks.ivanorBlocks.addAll(new Block[]{combustionMelter, electricMelter, steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler});
