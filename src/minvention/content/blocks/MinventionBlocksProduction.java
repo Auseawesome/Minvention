@@ -100,7 +100,7 @@ public class MinventionBlocksProduction {
 			));
 			size = 1;
 
-			float baseWaterInput = 0.25f;
+			float baseWaterInput = 0.1f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterCrudeEff);
 			liquidCapacity = 180f;
