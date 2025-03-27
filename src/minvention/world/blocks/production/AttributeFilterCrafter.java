@@ -29,7 +29,7 @@ public class AttributeFilterCrafter extends FilterGenericCrafter {
 
 		addBar("efficiency", (AttributeFilterCrafterBuild entity) ->
 			new Bar(
-				() -> Core.bundle.format("bar.minvention-tile-efficiency", (int) (entity.attributeEfficiencyMultiplier() * 100 * displayEfficiencyScale)),
+				() -> Core.bundle.format("bar.minvention-tile-efficiency", entity.attributeEfficiencyMultiplier() * 100 * displayEfficiencyScale),
 				() -> Pal.lightOrange,
 				entity::attributeEfficiencyMultiplier));
 	}
