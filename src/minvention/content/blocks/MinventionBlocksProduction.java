@@ -5,13 +5,8 @@ import minvention.audiovisual.MinventionPal;
 import minvention.content.*;
 import minvention.world.blocks.production.steam.AttributeSteamBoiler;
 import minvention.world.blocks.production.steam.SteamBoiler;
-import arc.graphics.Color;
 import arc.struct.Seq;
-import arc.util.*;
 import mindustry.content.*;
-import mindustry.entities.effect.*;
-import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
 import mindustry.type.*;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -20,7 +15,6 @@ import mindustry.world.meta.Attribute;
 import multicraft.*;
 
 import static minvention.Vars.*;
-import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
 public class MinventionBlocksProduction {
@@ -105,9 +99,9 @@ public class MinventionBlocksProduction {
 			));
 			size = 1;
 
-			float steamOutput = 0.25f;
-			consumeLiquid(Liquids.water, steamOutput);
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			float baseWaterInput = 0.25f;
+			consumeLiquid(Liquids.water, baseWaterInput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = 180f;
 
 			squareSprite = false;
@@ -132,9 +126,9 @@ public class MinventionBlocksProduction {
 			));
 			size = 2;
 
-			float steamOutput = 0.5f;
-			consumeLiquid(Liquids.water, steamOutput);
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			float baseWaterInput = 0.5f;
+			consumeLiquid(Liquids.water, baseWaterInput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = steamKettle.liquidCapacity * 2;
 
 			squareSprite = false;
@@ -163,9 +157,9 @@ public class MinventionBlocksProduction {
 			));
 			size = 4;
 
-			float steamOutput = 2f;
-			consumeLiquid(Liquids.water, steamOutput);
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			float baseWaterInput = 2f;
+			consumeLiquid(Liquids.water, baseWaterInput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 			liquidCapacity = steamKettle.liquidCapacity * 4;
 
 			squareSprite = false;
@@ -201,9 +195,9 @@ public class MinventionBlocksProduction {
 				}}
 			);
 			attribute = Attribute.heat;
-			float steamOutput = 1.5f;
-			consumeLiquid(Liquids.water, steamOutput);
-			outputLiquid = new LiquidStack(MinventionLiquids.steam, steamOutput * steamConversionScl);
+			float baseWaterInput = 1.5f;
+			consumeLiquid(Liquids.water, baseWaterInput);
+			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam);
 		}};
 		MinventionBlocks.ivanorBlocks.addAll(new Block[]{combustionMelter, electricMelter, steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler});
     }
