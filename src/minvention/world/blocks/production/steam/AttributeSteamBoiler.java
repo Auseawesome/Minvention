@@ -18,12 +18,4 @@ public class AttributeSteamBoiler extends AttributeCrafter {
 		maxBoost = 3f;
 		scaleLiquidConsumption = true;
 	}
-
-	public class AttributeSteamBoilerBuild extends AttributeCrafterBuild {
-
-		@Override
-		public float efficiencyScale() {
-			return 1.0f;
-		}
-	}
 }
