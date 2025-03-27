@@ -5,8 +5,8 @@ import arc.assets.Loadable;
 public class Vars implements Loadable {
 	// Scale Factors
 	public static final float waterPerSteam = 5;
-	public static final float waterPerIce = 10;
-	public static final float waterPerSnow = 2;
+	public static final float waterPerIce = 30;
+	public static final float waterPerSnow = 12;
 
 	// Water efficiency per tier
 	public static final float waterCrudeEff = 0.5f;

@@ -1,5 +1,7 @@
 package minvention.content.blocks;
 
+import minvention.world.blocks.production.FilterGenericCrafter;
+import minvention.world.consumers.ConsumeItemFuelFlammable;
 import minvention.world.consumers.ConsumeLiquidScaling;
 import minvention.world.drawer.DrawBoilerSmoke;
 import minvention.audiovisual.MinventionPal;
@@ -31,7 +33,7 @@ public class MinventionBlocksProduction {
     public static void load() {
 
         // Melters
-        combustionMelter = new GenericCrafter("combustion-melter") {{
+        combustionMelter = new FilterGenericCrafter("combustion-melter") {{
 			requirements(Category.crafting, with(
 				Items.copper, 40,
 				Items.lead, 10
@@ -42,13 +44,13 @@ public class MinventionBlocksProduction {
 			hasLiquids = true;
 			liquidCapacity = 12;
 
-			craftTime = 600f;
-			consumePower(3.5f);
+			craftTime = 120f;
+			consume(new ConsumeItemFuelFlammable());
 			consumeItems(
-				new ItemStack(MinventionItems.snow, 3)
+				new ItemStack(MinventionItems.snow, 4)
 			);
 			outputLiquid = new LiquidStack(
-				Liquids.water, 0.1f
+				Liquids.water, waterPerSnow * 4 / craftTime * waterBasicEff
 			);
         }};
 
@@ -66,28 +68,28 @@ public class MinventionBlocksProduction {
 
             resolvedRecipes = Seq.with(
                 new Recipe() {{
+					craftTime = 20f;
                     input = new IOEntry(
                         Seq.with(ItemStack.with(MinventionItems.snow, 1)),
+                        Seq.with(),
+                        0.5f
+                    );
+                    output = new IOEntry(
+                        Seq.with(),
+                        Seq.with(LiquidStack.with(Liquids.water, waterPerSnow / craftTime * waterAdvancedEff))
+                    );
+                }},
+                new Recipe() {{
+					craftTime = 30f;
+                    input = new IOEntry(
+                        Seq.with(ItemStack.with(MinventionItems.ice, 1)),
                         Seq.with(),
                         1f
                     );
                     output = new IOEntry(
                         Seq.with(),
-                        Seq.with(LiquidStack.with(Liquids.water, 0.5f))
+                        Seq.with(LiquidStack.with(Liquids.water, waterPerIce / craftTime * waterAdvancedEff))
                     );
-                    craftTime = 120f;
-                }},
-                new Recipe() {{
-                    input = new IOEntry(
-                        Seq.with(ItemStack.with(MinventionItems.ice, 1)),
-                        Seq.with(),
-                        2f
-                    );
-                    output = new IOEntry(
-                        Seq.with(),
-                        Seq.with(LiquidStack.with(Liquids.water, 0.5f))
-                    );
-                    craftTime = 600f;
                 }}
             );
         }};
