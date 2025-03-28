@@ -10,8 +10,11 @@ import static mindustry.type.ItemStack.*;
 
 public class MinventionBlocksDistribution {
     public static Block
-    // Conveyors
-    mechanicalConveyor
+            // Conveyors
+            mechanicalConveyor,
+
+            // Routers
+            mechanicalRouter
 
     ;
 
@@ -24,6 +27,12 @@ public class MinventionBlocksDistribution {
             buildCostMultiplier = 2f;
             researchCost = with(Items.copper, 5);
         }};
+
+        mechanicalRouter = new Router("mechanical-router") {{
+            requirements(Category.distribution, with(Items.copper,3));
+            buildCostMultiplier = 4f;
+        }};
+
         MinventionBlocks.ivanorBlocks.addAll(new Block[]{mechanicalConveyor});
     }
 }
