@@ -14,8 +14,14 @@ public class MinventionItems {
 			snow, ice;
     
     public static void load() {
-		iron = new Item("item-iron", Color.valueOf("888faa"));
-		snow = new Item("item-snow", Color.valueOf("e1e9f0"));
-        ice = new Item("item-ice", Color.valueOf("c2bffb"));
+		snow = new Item("item-snow", Color.valueOf("e1e9f0")) {{
+			lowPriority = true;
+			buildable = false;
+		}};
+        ice = new Item("item-ice", Color.valueOf("c2bffb")) {{
+			hardness = 3;
+			lowPriority = true;
+			buildable = false;
+		}};
 	}
 }
