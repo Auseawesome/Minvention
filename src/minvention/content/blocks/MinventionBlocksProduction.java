@@ -38,7 +38,10 @@ public class MinventionBlocksProduction {
     public static void load() {
 		// Drills
 		mechanicalDrill = new Drill("mechanical-drill") {{
-			requirements(Category.production, with(Items.copper, 12));
+			requirements(Category.production, with(
+					MinventionItems.iron, 8,
+					Items.copper, 4
+			));
 			tier = 2;
 			drillTime = 600;
 			size = 2;
