@@ -21,9 +21,32 @@ public class MinventionBlocksDistribution {
         Blocks.conveyor.requirements(Category.distribution, with(
                 iron, 1
         ));
+        Blocks.junction.requirements(Category.distribution, with(
+                iron, 2
+        ));
+        Blocks.itemBridge.requirements(Category.distribution, with(
+                iron, 6,
+                copper, 6
+        ));
+        Blocks.sorter.requirements(Category.distribution, with(
+                iron, 2,
+                copper, 2
+        ));
+        Blocks.invertedSorter.requirements(Category.distribution, with(
+                iron, 2,
+                copper, 2
+        ));
         Blocks.router.requirements(Category.distribution, with(
                 iron, 2,
                 copper, 1
+        ));
+        Blocks.overflowGate.requirements(Category.distribution, with(
+                iron, 2,
+                copper, 2
+        ));
+        Blocks.underflowGate.requirements(Category.distribution, with(
+                iron, 2,
+                copper, 2
         ));
     }
 }
