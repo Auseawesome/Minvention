@@ -19,7 +19,9 @@ public class IvanorTechTree{
 
         MinventionPlanets.ivanor.techTree = nodeRoot("ivanor", Blocks.coreShard, true, () -> {
             node(MinventionBlocksDistribution.mechanicalConveyor, ivanorSector, () -> {
+                node(MinventionBlocksDistribution.mechanicalRouter, ivanorSector, () -> {
 
+                });
             });
             node(MinventionBlocksProduction.combustionMelter, ivanorSector, () -> {
                 node(MinventionBlocksProduction.electricMelter);
