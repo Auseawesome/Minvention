@@ -11,26 +11,11 @@ import static mindustry.type.ItemStack.*;
 public class MinventionBlocksDistribution {
     public static Block
             // Conveyors
-            mechanicalConveyor,
-
-            // Routers
-            mechanicalRouter
+            placeholder
 
     ;
 
     public static void load(){
-        mechanicalConveyor = new Conveyor("mechanical-conveyor") {{
-            requirements(Category.distribution, with(Items.copper,1));
-            health = 45;
-            speed = 0.03f;
-            displayedSpeed = 4.2f;
-            buildCostMultiplier = 2f;
-            researchCost = with(Items.copper, 5);
-        }};
 
-        mechanicalRouter = new Router("mechanical-router") {{
-            requirements(Category.distribution, with(Items.copper,3));
-            buildCostMultiplier = 4f;
-        }};
     }
 }

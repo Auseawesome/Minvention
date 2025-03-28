@@ -13,8 +13,8 @@ public class MinventionTechTree{
     public static void load(){
 
         Planets.serpulo.techTree = nodeRoot("ivanor", Blocks.coreShard, true, () -> {
-            node(MinventionBlocksDistribution.mechanicalConveyor, () -> {
-                node(MinventionBlocksDistribution.mechanicalRouter, () -> {
+            node(Blocks.conveyor, () -> {
+                node(Blocks.router, () -> {
 
                 });
             });
