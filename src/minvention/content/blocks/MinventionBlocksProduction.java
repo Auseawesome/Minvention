@@ -32,11 +32,11 @@ public class MinventionBlocksProduction {
 
     public static void load() {
 
-        // Melters
-        combustionMelter = new FilterGenericCrafter("combustion-melter") {{
+		// Melters
+		combustionMelter = new FilterGenericCrafter("combustion-melter") {{
 			requirements(Category.crafting, with(
-				Items.copper, 40,
-				Items.lead, 10
+					Items.copper, 40,
+					Items.lead, 10
 			));
 			size = 1;
 
@@ -47,58 +47,58 @@ public class MinventionBlocksProduction {
 			craftTime = 120f;
 			consume(new ConsumeItemFuelFlammable());
 			consumeItems(
-				new ItemStack(MinventionItems.snow, 4)
+					new ItemStack(MinventionItems.snow, 4)
 			);
 			outputLiquid = new LiquidStack(
-				Liquids.water, waterPerSnow * 4 / craftTime * waterBasicEff
+					Liquids.water, waterPerSnow * 4 / craftTime * waterBasicEff
 			);
-        }};
+		}};
 
-        electricMelter = new MultiCrafter("electric-melter") {{
-            requirements(Category.crafting, with(
-                Items.copper, 100,
-                Items.lead, 40,
-                Items.graphite, 20
-            ));
-            size = 2;
-
-            hasItems = true;
-            hasLiquids = true;
-            liquidCapacity = 60;
-
-            resolvedRecipes = Seq.with(
-                new Recipe() {{
-					craftTime = 20f;
-                    input = new IOEntry(
-                        Seq.with(ItemStack.with(MinventionItems.snow, 1)),
-                        Seq.with(),
-                        0.5f
-                    );
-                    output = new IOEntry(
-                        Seq.with(),
-                        Seq.with(LiquidStack.with(Liquids.water, waterPerSnow / craftTime * waterAdvancedEff))
-                    );
-                }},
-                new Recipe() {{
-					craftTime = 30f;
-                    input = new IOEntry(
-                        Seq.with(ItemStack.with(MinventionItems.ice, 1)),
-                        Seq.with(),
-                        1f
-                    );
-                    output = new IOEntry(
-                        Seq.with(),
-                        Seq.with(LiquidStack.with(Liquids.water, waterPerIce / craftTime * waterAdvancedEff))
-                    );
-                }}
-            );
-        }};
-
-        // Steam Production
-        steamKettle = new SteamBoiler("steam-kettle") {{
+		electricMelter = new MultiCrafter("electric-melter") {{
 			requirements(Category.crafting, with(
-				Items.copper, 12,
-				Items.lead, 12
+					Items.copper, 100,
+					Items.lead, 40,
+					Items.graphite, 20
+			));
+			size = 2;
+
+			hasItems = true;
+			hasLiquids = true;
+			liquidCapacity = 60;
+
+			resolvedRecipes = Seq.with(
+					new Recipe() {{
+						craftTime = 20f;
+						input = new IOEntry(
+								Seq.with(ItemStack.with(MinventionItems.snow, 1)),
+								Seq.with(),
+								0.5f
+						);
+						output = new IOEntry(
+								Seq.with(),
+								Seq.with(LiquidStack.with(Liquids.water, waterPerSnow / craftTime * waterAdvancedEff))
+						);
+					}},
+					new Recipe() {{
+						craftTime = 30f;
+						input = new IOEntry(
+								Seq.with(ItemStack.with(MinventionItems.ice, 1)),
+								Seq.with(),
+								1f
+						);
+						output = new IOEntry(
+								Seq.with(),
+								Seq.with(LiquidStack.with(Liquids.water, waterPerIce / craftTime * waterAdvancedEff))
+						);
+					}}
+			);
+		}};
+
+		// Steam Production
+		steamKettle = new SteamBoiler("steam-kettle") {{
+			requirements(Category.crafting, with(
+					Items.copper, 12,
+					Items.lead, 12
 			));
 			size = 1;
 
@@ -109,23 +109,23 @@ public class MinventionBlocksProduction {
 
 			squareSprite = false;
 			drawer = new DrawMulti(
-				new DrawDefault(),
-				new DrawWarmupRegion(),
-				new DrawBoilerSmoke() {{
-					size = 1.5f;
-					particles = 18;
-					lifetime = 150f;
-					spreadRadius = 3f;
-				}}
+					new DrawDefault(),
+					new DrawWarmupRegion(),
+					new DrawBoilerSmoke() {{
+						size = 1.5f;
+						particles = 18;
+						lifetime = 150f;
+						spreadRadius = 3f;
+					}}
 			);
 
 		}};
 		industrialBoiler = new SteamBoiler("industrial-boiler") {{
 			requirements(Category.crafting, with(
-				Items.copper, 55,
-				Items.graphite, 35,
-				Items.silicon, 35,
-				Items.lead, 35
+					Items.copper, 55,
+					Items.graphite, 35,
+					Items.silicon, 35,
+					Items.lead, 35
 			));
 			size = 2;
 
@@ -136,27 +136,27 @@ public class MinventionBlocksProduction {
 
 			squareSprite = false;
 			drawer = new DrawMulti(
-				new DrawDefault(),
-				new DrawWarmupRegion() {{
-					sinMag = 0.4f;
-					sinScl = sinMag * 15f;
-				}},
-				new DrawBoilerSmoke() {{
-					particles = 28;
-					lifetime = 160f;
-					size = 2.5f;
-					spreadRadius = 5f;
-				}}
+					new DrawDefault(),
+					new DrawWarmupRegion() {{
+						sinMag = 0.4f;
+						sinScl = sinMag * 15f;
+					}},
+					new DrawBoilerSmoke() {{
+						particles = 28;
+						lifetime = 160f;
+						size = 2.5f;
+						spreadRadius = 5f;
+					}}
 			);
 		}};
 		pressureBoiler = new SteamBoiler("pressure-boiler") {{
 			requirements(Category.crafting, with(
-				Items.copper, 125,
-				Items.lead, 100,
-				Items.titanium, 85,
-				Items.metaglass, 65,
-				Items.silicon, 65,
-				Items.graphite, 60
+					Items.copper, 125,
+					Items.lead, 100,
+					Items.titanium, 85,
+					Items.metaglass, 65,
+					Items.silicon, 65,
+					Items.graphite, 60
 			));
 			size = 4;
 
@@ -167,41 +167,40 @@ public class MinventionBlocksProduction {
 
 			squareSprite = false;
 			drawer = new DrawMulti(
-				new DrawDefault(),
-				new DrawGlowRegion() {{
-					glowScale = 3f;
-					color = MinventionPal.drawGlowOrange;
-				}},
-				new DrawBoilerSmoke() {{
-					particles = 40;
-					lifetime = 210f;
-					size = 5f;
-					spreadRadius = 14f;
-				}}
+					new DrawDefault(),
+					new DrawGlowRegion() {{
+						glowScale = 3f;
+						color = MinventionPal.drawGlowOrange;
+					}},
+					new DrawBoilerSmoke() {{
+						particles = 40;
+						lifetime = 210f;
+						size = 5f;
+						spreadRadius = 14f;
+					}}
 			);
 		}};
 		geothermalBoiler = new AttributeSteamBoiler("geothermal-boiler") {{
 			requirements(Category.crafting, with(
-				Items.copper, 70,
-				Items.graphite, 45,
-				Items.silicon, 40,
-				Items.lead, 50,
-				Items.metaglass, 30
+					Items.copper, 70,
+					Items.graphite, 45,
+					Items.silicon, 40,
+					Items.lead, 50,
+					Items.metaglass, 30
 			));
 			size = 3;
 			updateEffect = Fx.steam;
 			drawer = new DrawMulti(
-				new DrawDefault(),
-				new DrawGlowRegion() {{
-					glowScale = 3f;
-					color = MinventionPal.drawGlowOrange;
-				}}
+					new DrawDefault(),
+					new DrawGlowRegion() {{
+						glowScale = 3f;
+						color = MinventionPal.drawGlowOrange;
+					}}
 			);
 			attribute = Attribute.heat;
 			float baseWaterInput = 1.5f;
 			consume(new ConsumeLiquidScaling(Liquids.water, baseWaterInput));
 			outputLiquid = new LiquidStack(MinventionLiquids.steam, baseWaterInput / waterPerSteam * waterAdvancedEff);
 		}};
-		MinventionBlocks.ivanorBlocks.addAll(new Block[]{combustionMelter, electricMelter, steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler});
-    }
+	}
 }

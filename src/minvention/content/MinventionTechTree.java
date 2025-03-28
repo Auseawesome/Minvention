@@ -1,29 +1,24 @@
 package minvention.content;
 
-import arc.struct.*;
-import mindustry.game.Objectives.*;
-import minvention.content.MinventionPlanets;
+import mindustry.content.Planets;
 import mindustry.content.Blocks;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import minvention.content.blocks.MinventionBlocksDistribution;
 import minvention.content.blocks.MinventionBlocksProduction;
 
-import static mindustry.Vars.*;
 import static mindustry.content.TechTree.*;
 
-public class IvanorTechTree{
+public class MinventionTechTree{
     public static void load(){
 
-        Seq<Objective> ivanorSector = Seq.with(new OnPlanet(MinventionPlanets.ivanor));
-
-        MinventionPlanets.ivanor.techTree = nodeRoot("ivanor", Blocks.coreShard, true, () -> {
-            node(MinventionBlocksDistribution.mechanicalConveyor, ivanorSector, () -> {
-                node(MinventionBlocksDistribution.mechanicalRouter, ivanorSector, () -> {
+        Planets.serpulo.techTree = nodeRoot("ivanor", Blocks.coreShard, true, () -> {
+            node(MinventionBlocksDistribution.mechanicalConveyor, () -> {
+                node(MinventionBlocksDistribution.mechanicalRouter, () -> {
 
                 });
             });
-            node(MinventionBlocksProduction.combustionMelter, ivanorSector, () -> {
+            node(MinventionBlocksProduction.combustionMelter, () -> {
                 node(MinventionBlocksProduction.electricMelter);
             });
 

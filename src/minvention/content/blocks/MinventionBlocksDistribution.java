@@ -32,7 +32,5 @@ public class MinventionBlocksDistribution {
             requirements(Category.distribution, with(Items.copper,3));
             buildCostMultiplier = 4f;
         }};
-
-        MinventionBlocks.ivanorBlocks.addAll(new Block[]{mechanicalConveyor});
     }
 }
