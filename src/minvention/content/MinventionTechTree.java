@@ -15,7 +15,21 @@ public class MinventionTechTree{
         Planets.serpulo.techTree = nodeRoot("ivanor", Blocks.coreShard, true, () -> {
             node(Blocks.conveyor, () -> {
                 node(Blocks.router, () -> {
+                    node(Blocks.overflowGate, () -> {
+                        node(Blocks.underflowGate, () -> {
 
+                        });
+                    });
+                    node(Blocks.sorter, () -> {
+                        node(Blocks.invertedSorter, () -> {
+
+                        });
+                    });
+                });
+                node(Blocks.junction, () -> {
+                    node(Blocks.itemBridge, () -> {
+
+                    });
                 });
             });
             node(MinventionBlocksProduction.combustionMelter, () -> {
