@@ -11,7 +11,8 @@ public class MinventionBlocksEnvironment {
     ;
 
     public static void load() {
-        oreIron = new OreBlock(MinventionItems.iron) {{
+        oreIron = new OreBlock("ore-iron") {{
+            itemDrop = MinventionItems.iron;
             oreDefault = true;
             oreThreshold = 0.815f;
             oreScale = 23.7621f;
