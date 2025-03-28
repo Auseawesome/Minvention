@@ -21,6 +21,8 @@ import mindustry.world.draw.*;
 import mindustry.world.meta.Attribute;
 import multicraft.*;
 
+import static mindustry.content.Items.*;
+import static minvention.content.MinventionItems.*;
 import static minvention.Vars.*;
 import static mindustry.type.ItemStack.with;
 
@@ -39,14 +41,14 @@ public class MinventionBlocksProduction {
 		// Drills
 		mechanicalDrill = new Drill("mechanical-drill") {{
 			requirements(Category.production, with(
-					MinventionItems.iron, 8,
-					Items.copper, 4
+					iron, 8,
+					copper, 4
 			));
 			tier = 2;
 			drillTime = 600;
 			size = 2;
 			envEnabled ^= Env.space;
-			researchCost = with(Items.copper, 10);
+			researchCost = with(iron, 10);
 			liquidBoostIntensity = 1f;
 			liquidCapacity = 0f;
 			hasLiquids = false;
@@ -55,8 +57,8 @@ public class MinventionBlocksProduction {
 		// Melters
 		combustionMelter = new FilterGenericCrafter("combustion-melter") {{
 			requirements(Category.crafting, with(
-					Items.copper, 40,
-					Items.lead, 10
+					copper, 40,
+					lead, 10
 			));
 			size = 1;
 
@@ -67,7 +69,7 @@ public class MinventionBlocksProduction {
 			craftTime = 120f;
 			consume(new ConsumeItemFuelFlammable());
 			consumeItems(
-					new ItemStack(MinventionItems.snow, 4)
+					new ItemStack(snow, 4)
 			);
 			outputLiquid = new LiquidStack(
 					Liquids.water, waterPerSnow * 4 / craftTime * waterBasicEff
@@ -76,9 +78,9 @@ public class MinventionBlocksProduction {
 
 		electricMelter = new MultiCrafter("electric-melter") {{
 			requirements(Category.crafting, with(
-					Items.copper, 100,
-					Items.lead, 40,
-					Items.graphite, 20
+					copper, 100,
+					lead, 40,
+					graphite, 20
 			));
 			size = 2;
 
@@ -90,7 +92,7 @@ public class MinventionBlocksProduction {
 					new Recipe() {{
 						craftTime = 20f;
 						input = new IOEntry(
-								Seq.with(ItemStack.with(MinventionItems.snow, 1)),
+								Seq.with(ItemStack.with(snow, 1)),
 								Seq.with(),
 								0.5f
 						);
@@ -102,7 +104,7 @@ public class MinventionBlocksProduction {
 					new Recipe() {{
 						craftTime = 30f;
 						input = new IOEntry(
-								Seq.with(ItemStack.with(MinventionItems.ice, 1)),
+								Seq.with(ItemStack.with(ice, 1)),
 								Seq.with(),
 								1f
 						);
@@ -117,8 +119,8 @@ public class MinventionBlocksProduction {
 		// Steam Production
 		steamKettle = new SteamBoiler("steam-kettle") {{
 			requirements(Category.crafting, with(
-					Items.copper, 12,
-					Items.lead, 12
+					copper, 12,
+					lead, 12
 			));
 			size = 1;
 
@@ -142,10 +144,10 @@ public class MinventionBlocksProduction {
 		}};
 		industrialBoiler = new SteamBoiler("industrial-boiler") {{
 			requirements(Category.crafting, with(
-					Items.copper, 55,
-					Items.graphite, 35,
-					Items.silicon, 35,
-					Items.lead, 35
+					copper, 55,
+					graphite, 35,
+					silicon, 35,
+					lead, 35
 			));
 			size = 2;
 
@@ -171,12 +173,12 @@ public class MinventionBlocksProduction {
 		}};
 		pressureBoiler = new SteamBoiler("pressure-boiler") {{
 			requirements(Category.crafting, with(
-					Items.copper, 125,
-					Items.lead, 100,
-					Items.titanium, 85,
-					Items.metaglass, 65,
-					Items.silicon, 65,
-					Items.graphite, 60
+					copper, 125,
+					lead, 100,
+					titanium, 85,
+					metaglass, 65,
+					silicon, 65,
+					graphite, 60
 			));
 			size = 4;
 
@@ -202,11 +204,11 @@ public class MinventionBlocksProduction {
 		}};
 		geothermalBoiler = new AttributeSteamBoiler("geothermal-boiler") {{
 			requirements(Category.crafting, with(
-					Items.copper, 70,
-					Items.graphite, 45,
-					Items.silicon, 40,
-					Items.lead, 50,
-					Items.metaglass, 30
+					copper, 70,
+					graphite, 45,
+					silicon, 40,
+					lead, 50,
+					metaglass, 30
 			));
 			size = 3;
 			updateEffect = Fx.steam;
