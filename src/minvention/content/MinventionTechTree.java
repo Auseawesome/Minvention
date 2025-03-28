@@ -32,6 +32,9 @@ public class MinventionTechTree{
                     });
                 });
             });
+            node(MinventionBlocksProduction.mechanicalDrill, () -> {
+
+            });
             node(MinventionBlocksProduction.combustionMelter, () -> {
                 node(MinventionBlocksProduction.electricMelter);
             });

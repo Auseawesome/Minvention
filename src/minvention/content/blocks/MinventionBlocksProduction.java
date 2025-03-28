@@ -1,5 +1,9 @@
 package minvention.content.blocks;
 
+import mindustry.world.blocks.production.Drill;
+import mindustry.world.consumers.Consume;
+import mindustry.world.meta.Env;
+import mindustry.world.meta.Stat;
 import minvention.world.blocks.production.FilterGenericCrafter;
 import minvention.world.consumers.ConsumeItemFuelFlammable;
 import minvention.world.consumers.ConsumeLiquidScaling;
@@ -22,15 +26,28 @@ import static mindustry.type.ItemStack.with;
 
 public class MinventionBlocksProduction {
 	public static Block
-	// Drills
+			// Drills
+			mechanicalDrill,
 
-	// Melters
-	combustionMelter, electricMelter,
+			// Melters
+			combustionMelter, electricMelter,
 
-    // Steam Production
-    steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler;
+    		// Steam Production
+    		steamKettle, pressureBoiler, industrialBoiler, geothermalBoiler;
 
     public static void load() {
+		// Drills
+		mechanicalDrill = new Drill("mechanical-drill") {{
+			requirements(Category.production, with(Items.copper, 12));
+			tier = 2;
+			drillTime = 600;
+			size = 2;
+			envEnabled ^= Env.space;
+			researchCost = with(Items.copper, 10);
+			liquidBoostIntensity = 1f;
+			liquidCapacity = 0f;
+			hasLiquids = false;
+		}};
 
 		// Melters
 		combustionMelter = new FilterGenericCrafter("combustion-melter") {{
