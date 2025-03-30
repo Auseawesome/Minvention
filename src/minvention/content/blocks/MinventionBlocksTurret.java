@@ -32,10 +32,10 @@ public class MinventionBlocksTurret {
                     lifetime = 60f;
                     ammoMultiplier = 2;
                 }},
-                MinventionItems.snow, new BasicBulletType(1.0f, 0) {{
+                MinventionItems.snow, new BasicBulletType(2f, 0) {{
                     width = 7f;
                     height = 7f;
-                    lifetime = 150f;
+                    lifetime = 60f;
                     ammoMultiplier = 1;
                     status = StatusEffects.slow;
                     statusDuration = 60f;
