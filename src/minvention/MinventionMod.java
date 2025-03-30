@@ -23,6 +23,7 @@ public class MinventionMod extends Mod{
 		MinventionItems.load();
         MinventionLiquids.load();
 		MinventionBlocks.load();
+        MinventionStatusEffects.load();
 
         MinventionTechTree.load();
         Planets.serpulo.generator = new MinventionPlanetGenerator();
