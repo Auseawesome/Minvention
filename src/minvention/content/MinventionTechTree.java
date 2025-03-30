@@ -4,6 +4,7 @@ import mindustry.content.Planets;
 import mindustry.content.Blocks;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
+import minvention.content.blocks.MinventionBlocksDefense;
 import minvention.content.blocks.MinventionBlocksDistribution;
 import minvention.content.blocks.MinventionBlocksProduction;
 
@@ -35,8 +36,11 @@ public class MinventionTechTree{
             node(MinventionBlocksProduction.mechanicalDrill, () -> {
 
             });
-            node(MinventionBlocksProduction.combustionMelter, () -> {
-                node(MinventionBlocksProduction.electricMelter);
+            node(Blocks.duo, () -> {
+                node(Blocks.scatter);
+                node(MinventionBlocksDefense.ironWall, () -> {
+                    node(MinventionBlocksDefense.ironWallLarge);
+                });
             });
 
             nodeProduce(Items.copper, () -> {
