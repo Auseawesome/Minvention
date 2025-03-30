@@ -7,8 +7,8 @@ import minvention.content.MinventionItems;
 
 public class MinventionBlocksEnvironment {
     public static Block
-            // Ores
-            oreIron
+        // Ores
+        oreIron
     ;
 
     public static void load() {

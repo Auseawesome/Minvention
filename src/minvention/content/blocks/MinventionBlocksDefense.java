@@ -11,11 +11,9 @@ import static mindustry.type.ItemStack.*;
 
 public class MinventionBlocksDefense {
     public static Block
-            ironWall, ironWallLarge
-    ;
+        ironWall, ironWallLarge;
 
     public static void load() {
-
         int wallHealthMultiplier = 4;
 
         ironWall = new Wall("iron-wall"){{

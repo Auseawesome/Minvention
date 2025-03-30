@@ -6,11 +6,11 @@ import minvention.content.blocks.*;
 
 public class MinventionBlocks {
 
-	public static void load() {
-		MinventionBlocksProduction.load();
-		MinventionBlocksDistribution.load();
-		MinventionBlocksEnvironment.load();
-		MinventionBlocksTurret.load();
-		MinventionBlocksDefense.load();
-	}
+    public static void load() {
+        MinventionBlocksProduction.load();
+        MinventionBlocksDistribution.load();
+        MinventionBlocksEnvironment.load();
+        MinventionBlocksTurret.load();
+        MinventionBlocksDefense.load();
+    }
 }

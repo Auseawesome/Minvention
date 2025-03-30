@@ -12,10 +12,8 @@ import static mindustry.type.ItemStack.*;
 
 public class MinventionBlocksDistribution {
     public static Block
-            // Conveyors
-            placeholder
-
-    ;
+        // Conveyors
+        placeholder;
 
     public static void load(){
         Blocks.conveyor.requirements(Category.distribution, with(
