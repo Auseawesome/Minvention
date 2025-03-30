@@ -10,5 +10,6 @@ public class MinventionBlocks {
 		MinventionBlocksProduction.load();
 		MinventionBlocksDistribution.load();
 		MinventionBlocksEnvironment.load();
+		MinventionBlocksTurret.load();
 	}
 }
