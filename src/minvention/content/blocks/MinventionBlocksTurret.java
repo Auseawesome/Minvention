@@ -2,7 +2,6 @@ package minvention.content.blocks;
 
 import arc.graphics.Color;
 import mindustry.content.Blocks;
-import mindustry.content.Items;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.type.Category;
@@ -15,7 +14,7 @@ import static minvention.content.MinventionItems.*;
 import static mindustry.type.ItemStack.*;
 
 public class MinventionBlocksTurret {
-    public static void modifyTurret(Block turret_block, Object... objects) {
+    public static void modifyAmmo(Block turret_block, Object... objects) {
         if (turret_block instanceof ItemTurret turret) {
             turret.ammo(objects);
         }
@@ -26,7 +25,7 @@ public class MinventionBlocksTurret {
                 iron, 30,
                 copper, 5
         ));
-        modifyTurret(Blocks.duo,
+        modifyAmmo(Blocks.duo,
                 MinventionItems.iron, new BasicBulletType(2.5f, 9){{
                     width = 7f;
                     height = 9f;
