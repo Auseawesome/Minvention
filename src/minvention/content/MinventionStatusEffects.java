@@ -17,7 +17,6 @@ public class MinventionStatusEffects {
                 opposite(StatusEffects.melting,StatusEffects.burning);
 
                 affinity(StatusEffects.freezing, (unit, result, time) -> {
-                    unit.damagePierce(transitionDamage);
                     result.set(StatusEffects.freezing, Math.max(time,result.time));
                 });
             });
