@@ -25,6 +25,7 @@ public class MinventionMod extends Mod{
 
         MinventionTechTree.load();
         Planets.serpulo.generator = new MinventionPlanetGenerator();
+        MinventionSectorPresets.load();
 	}
 
 }
