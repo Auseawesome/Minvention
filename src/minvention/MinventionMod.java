@@ -19,11 +19,11 @@ public class MinventionMod extends Mod{
     }
 
     @Override
-	public void loadContent() {
+    public void loadContent() {
         MinventionStatusEffects.load();
-		MinventionItems.load();
+        MinventionItems.load();
         MinventionLiquids.load();
-		MinventionBlocks.load();
+        MinventionBlocks.load();
 
         MinventionTechTree.load();
         Planets.serpulo.generator = new MinventionPlanetGenerator();
