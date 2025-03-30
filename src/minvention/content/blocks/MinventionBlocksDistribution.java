@@ -21,6 +21,7 @@ public class MinventionBlocksDistribution {
         Blocks.conveyor.requirements(Category.distribution, with(
                 iron, 1
         ));
+        Blocks.conveyor.researchCost = with(iron, 5);
         Blocks.junction.requirements(Category.distribution, with(
                 iron, 2
         ));
