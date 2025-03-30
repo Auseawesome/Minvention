@@ -9,6 +9,7 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
+import minvention.maps.planet.MinventionPlanetGenerator;
 
 public class MinventionMod extends Mod{
 
@@ -23,6 +24,7 @@ public class MinventionMod extends Mod{
 		MinventionBlocks.load();
 
         MinventionTechTree.load();
+        Planets.serpulo.generator = new MinventionPlanetGenerator();
 	}
 
 }
