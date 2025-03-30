@@ -8,6 +8,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import minvention.content.MinventionItems;
+import minvention.content.MinventionStatusEffects;
 
 import static mindustry.content.Items.*;
 import static minvention.content.MinventionItems.*;
@@ -37,7 +38,7 @@ public class MinventionBlocksTurret {
                     height = 7f;
                     lifetime = 60f;
                     ammoMultiplier = 1;
-                    status = StatusEffects.slow;
+                    status = MinventionStatusEffects.chilly;
                     statusDuration = 60f;
                     backColor = Color.valueOf("d2e6f5");
                     frontColor = Color.valueOf("f3f5ff");
