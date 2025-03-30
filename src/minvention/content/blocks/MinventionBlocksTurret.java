@@ -39,7 +39,7 @@ public class MinventionBlocksTurret {
                     lifetime = 150f;
                     ammoMultiplier = 1;
                     status = StatusEffects.slow;
-                    statusDuration = 1.0f;
+                    statusDuration = 60f;
                     backColor = Color.valueOf("d2e6f5");
                     frontColor = Color.valueOf("f3f5ff");
                 }}
