@@ -1,5 +1,6 @@
 package minvention;
 
+import mindustry.game.Team;
 import minvention.content.*;
 import arc.*;
 import arc.util.*;
@@ -25,6 +26,14 @@ public class MinventionMod extends Mod{
 
         MinventionTechTree.load();
         Planets.serpulo.generator = new MinventionPlanetGenerator();
+        Planets.serpulo.ruleSetter = r -> {
+            r.waveTeam = Team.crux;
+            r.placeRangeCheck = false;
+            r.showSpawns = false;
+            r.coreDestroyClear = true;
+            r.hideBannedBlocks = true;
+            r.bannedBlocks.add(Blocks.mechanicalDrill);
+        };
         MinventionSectorPresets.load();
 	}
 
