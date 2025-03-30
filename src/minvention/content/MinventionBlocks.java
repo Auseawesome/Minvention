@@ -11,5 +11,6 @@ public class MinventionBlocks {
 		MinventionBlocksDistribution.load();
 		MinventionBlocksEnvironment.load();
 		MinventionBlocksTurret.load();
+		MinventionBlocksDefense.load();
 	}
 }
