@@ -2,7 +2,7 @@ package minvention;
 
 import arc.assets.Loadable;
 
-public class Vars implements Loadable {
+public class MinventionVars implements Loadable {
 	// Scale Factors
 	public static final float waterPerSteam = 5;
 	public static final float waterPerIce = 30;

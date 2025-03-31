@@ -1,9 +1,7 @@
 package minvention.content.blocks;
 
 import mindustry.world.blocks.production.Drill;
-import mindustry.world.consumers.Consume;
 import mindustry.world.meta.Env;
-import mindustry.world.meta.Stat;
 import minvention.world.blocks.production.FilterGenericCrafter;
 import minvention.world.consumers.ConsumeItemFuelFlammable;
 import minvention.world.consumers.ConsumeLiquidScaling;
@@ -16,14 +14,13 @@ import arc.struct.Seq;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.*;
 import mindustry.world.meta.Attribute;
 import multicraft.*;
 
 import static mindustry.content.Items.*;
 import static minvention.content.MinventionItems.*;
-import static minvention.Vars.*;
+import static minvention.MinventionVars.*;
 import static mindustry.type.ItemStack.with;
 
 public class MinventionBlocksProduction {
