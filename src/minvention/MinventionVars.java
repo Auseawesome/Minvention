@@ -4,9 +4,9 @@ import arc.assets.Loadable;
 
 public class MinventionVars implements Loadable {
 	// Scale Factors
-	public static final float waterPerSteam = 5;
-	public static final float waterPerIce = 30;
-	public static final float waterPerSnow = 12;
+	public static final float waterPerSteam = 0.2f;
+	public static final float waterPerIce = 30f;
+	public static final float waterPerSnow = 12f;
 
 	// Water efficiency per tier
 	public static final float waterCrudeEff = 0.5f;
