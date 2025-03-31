@@ -10,7 +10,7 @@ public class MinventionVars implements Loadable {
 
 	// Water efficiency per tier
 	public static final float waterCrudeEff = 0.5f;
-	public static final float waterBasicEff = 0.67f;
+	public static final float waterBasicEff = 2f/3f;
 	public static final float waterImprovedEff = 0.75f;
 	public static final float waterAdvancedEff = 0.9f;
 	public static final float waterSealedEff = 1f;
