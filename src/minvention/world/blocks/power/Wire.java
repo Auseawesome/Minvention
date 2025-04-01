@@ -1,9 +1,11 @@
 package minvention.world.blocks.power;
 
 import arc.Core;
+import arc.graphics.Texture;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.util.Log;
+import mindustry.entities.units.BuildPlan;
 import mindustry.gen.Building;
 import mindustry.world.Block;
 import mindustry.world.Tile;
@@ -26,6 +28,13 @@ public class Wire extends PowerDistributor {
         for (int i = 0; i < 16; i++) {
             wireRegions[i] = Core.atlas.find(name+"-"+i);
         }
+    }
+
+    @Override
+    public void loadIcon() {
+        super.loadIcon();
+        fullIcon = Core.atlas.find(name+"-0");
+        uiIcon = Core.atlas.find(name+"-5");
     }
 
     public class WireBuild extends Building {
