@@ -1,5 +1,6 @@
 package minvention.content;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.struct.Seq;
 import mindustry.content.Items;
@@ -9,6 +10,9 @@ public class MinventionItems {
     public static Item
         // Metals
         iron,
+
+        // Refined Resources
+        refinedCarbon,
 
         // Natural
         snow, ice;
@@ -21,6 +25,9 @@ public class MinventionItems {
             hardness = 1;
             cost = 0.5f;
             alwaysUnlocked = true;
+        }};
+        refinedCarbon = new Item("item-refined-carbon", Color.valueOf("54545e")) {{
+            cost = 1f;
         }};
         snow = new Item("item-snow", Color.valueOf("e1e9f0")) {{
             lowPriority = true;
