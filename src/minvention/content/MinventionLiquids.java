@@ -13,7 +13,7 @@ public class MinventionLiquids {
         steam;
 
     public static void load() {
-        steam = new Liquid("gas-steam", MinventionPal.steamFront) {{
+        steam = new Liquid("steam", MinventionPal.steamFront) {{
             gas = true;
             heatCapacity = Liquids.water.heatCapacity * waterPerSteam;
             temperature = 0.8f;
