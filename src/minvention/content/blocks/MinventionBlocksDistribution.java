@@ -16,36 +16,36 @@ public class MinventionBlocksDistribution {
         placeholder;
 
     public static void load(){
-        Blocks.conveyor.requirements(Category.distribution, with(
+        Blocks.conveyor.requirements = with(
                 iron, 1
-        ));
+        );
         Blocks.conveyor.researchCost = with(iron, 5);
-        Blocks.junction.requirements(Category.distribution, with(
+        Blocks.junction.requirements = with(
                 iron, 2
-        ));
-        Blocks.itemBridge.requirements(Category.distribution, with(
+        );
+        Blocks.itemBridge.requirements = with(
                 iron, 6,
                 copper, 6
-        ));
-        Blocks.sorter.requirements(Category.distribution, with(
+        );
+        Blocks.sorter.requirements = with(
                 iron, 2,
                 copper, 2
-        ));
-        Blocks.invertedSorter.requirements(Category.distribution, with(
+        );
+        Blocks.invertedSorter.requirements = with(
                 iron, 2,
                 copper, 2
-        ));
-        Blocks.router.requirements(Category.distribution, with(
+        );
+        Blocks.router.requirements = with(
                 iron, 2,
                 copper, 1
-        ));
-        Blocks.overflowGate.requirements(Category.distribution, with(
+        );
+        Blocks.overflowGate.requirements = with(
                 iron, 2,
                 copper, 2
-        ));
-        Blocks.underflowGate.requirements(Category.distribution, with(
+        );
+        Blocks.underflowGate.requirements = with(
                 iron, 2,
                 copper, 2
-        ));
+        );
     }
 }
