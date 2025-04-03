@@ -125,7 +125,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         position = Tmp.v33.set(position).scl(this.scl);
         Block[][] testTerrain = {{Blocks.basalt, Blocks.sand},{Blocks.water,Blocks.sporeMoss}};
         double latitude = Math.asin(position.y/5)+Mathf.halfPi;
-        float longitude = (float) Math.atan(position.z/position.x);
+        double longitude = Math.atan(position.z/position.x);
         if (position.x < 0) {
             longitude += Mathf.pi;
         } else if (position.z < 0){
