@@ -22,10 +22,10 @@ public class MinventionBlocksTurret {
     }
 
     public static void load() {
-        Blocks.duo.requirements(Category.turret, with(
+        Blocks.duo.requirements = with(
                 iron, 30,
                 copper, 5
-        ));
+        );
         modifyAmmo(Blocks.duo,
                 MinventionItems.iron, new BasicBulletType(2.5f, 9){{
                     width = 7f;
@@ -44,9 +44,9 @@ public class MinventionBlocksTurret {
                     frontColor = Color.valueOf("f3f5ff");
                 }}
         );
-        Blocks.scatter.requirements(Category.turret, with(
+        Blocks.scatter.requirements = with(
                 iron, 100,
                 copper, 30
-        ));
+        );
     }
 }
