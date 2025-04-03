@@ -12,6 +12,7 @@ import arc.struct.FloatSeq;
 import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
+import arc.util.Log;
 import arc.util.Structs;
 import arc.util.Tmp;
 import arc.util.noise.Noise;
@@ -122,15 +123,16 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         float height = this.rawHeight(position);
         Tmp.v31.set(position);
         position = Tmp.v33.set(position).scl(this.scl);
-        float rad = this.scl;
-        float temp = Mathf.clamp(Math.abs(position.y * 2.0F) / rad);
-        float tnoise = Simplex.noise3d(this.seed, (double)7.0F, 0.56, (double)0.33333334F, (double)position.x, (double)(position.y + 999.0F), (double)position.z);
-        temp = Mathf.lerp(temp, tnoise, 0.5F);
-        height *= 1.2F;
-        height = Mathf.clamp(height);
-        float tar = Simplex.noise3d(this.seed, (double)4.0F, (double)0.55F, (double)0.5F, (double)position.x, (double)(position.y + 999.0F), (double)position.z) * 0.3F + Tmp.v31.dst(0.0F, 0.0F, 1.0F) * 0.2F;
-        Block res = this.arr[Mathf.clamp((int)(temp * (float)this.arr.length), 0, this.arr[0].length - 1)][Mathf.clamp((int)(height * (float)this.arr[0].length), 0, this.arr[0].length - 1)];
-        return tar > 0.5F ? (Block)this.tars.get(res, res) : res;
+        Block[][] testTerrain = {{Blocks.basalt, Blocks.sand},{Blocks.water,Blocks.sporeMoss}};
+        double latitude = Math.asin(position.y/5)+Mathf.halfPi;
+        float longitude = (float) Math.atan(position.z/position.x);
+        if (position.x < 0) {
+            longitude += Mathf.pi;
+        } else if (position.z < 0){
+            longitude += Mathf.pi * 2;
+        }
+        Log.info(longitude);
+        return testTerrain[(int) Math.max(Math.min(Math.abs(Math.floor(latitude/Mathf.halfPi)%2) ,testTerrain.length-1),0)][(int) Math.max(Math.min(Math.abs(Math.floor(longitude/Mathf.halfPi)%2) ,testTerrain.length-1),0)];
     }
 
     protected float noise(float x, float y, double octaves, double falloff, double scl, double mag) {
