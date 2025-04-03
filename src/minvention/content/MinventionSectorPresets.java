@@ -8,7 +8,7 @@ public class MinventionSectorPresets {
     public static SectorPreset groundZero;
 
     public static void load() {
-        groundZero = new SectorPreset("groundZero", serpulo, 15){{
+        groundZero = new SectorPreset("ground-zero", serpulo, 15){{
             alwaysUnlocked = true;
             addStartingItems = true;
             captureWave = 10;
