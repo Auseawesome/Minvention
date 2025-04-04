@@ -119,7 +119,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         } else if (position.z < 0) {
             longitude += 2;
         }
-        Block block = Blocks.sand;
+        Block block = Blocks.stone;
         if (height < 0.1f) {
             block = freezeWater(Blocks.deepwater, Blocks.water, Blocks.ice, temperature);
         } else if (height < 0.175f) {
