@@ -92,6 +92,15 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
 
     }
+    Block freezeWater(Block defaultWater, Block shallowWater, Block frozenWater, double temperature) {
+        if (temperature < 0f) {
+            return frozenWater;
+        }
+        if (temperature < 0.1f) {
+            return shallowWater;
+        }
+        return defaultWater;
+    }
 
     //TODO: Fix this to allow for better weighting and block selection
     Block getBlock(Vec3 position) {
@@ -112,28 +121,11 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
         Block block = Blocks.sand;
         if (height < 0.1f) {
-            if (temperature < 0f) {
-                block = Blocks.ice;
-            } else if (temperature < 0.1f) {
-                block = Blocks.water;
-            } else {
-                block = Blocks.deepwater;
-            }
+            block = freezeWater(Blocks.deepwater, Blocks.water, Blocks.ice, temperature);
         } else if (height < 0.175f) {
-            if (temperature < 0.0f) {
-                block = Blocks.ice;
-            } else if (temperature < 0.1f) {
-                //TODO: Make iceWater or similar
-                block = Blocks.sandWater;
-            } else {
-                block = Blocks.water;
-            }
+            block = freezeWater(Blocks.water, Blocks.sandWater, Blocks.ice, temperature);
         } else if (height < 0.25f) {
-            if (temperature < 0.1f) {
-                block = Blocks.ice;
-            } else {
-                block = Blocks.sandWater;
-            }
+            block = freezeWater(Blocks.sandWater, Blocks.sandWater, Blocks.ice, temperature);
         } else if (height > 0.45f) {
             block = Blocks.stone;
         } else if (height > 0.325f) {
