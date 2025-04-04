@@ -39,7 +39,7 @@ import minvention.content.blocks.MinventionBlocksEnvironment;
 
 public class MinventionPlanetGenerator extends PlanetGenerator {
     public static boolean alt = false;
-    BaseGenerator basegen = new BaseGenerator();
+    BaseGenerator baseGen = new BaseGenerator();
     float scl = 5.0F;
     float waterOffset = 0.07F;
     boolean genLakes = false;
@@ -264,9 +264,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                 for(int j = 0; j < enemySpawns; ++j) {
                     float enemyOffset = this.rand.range(60.0F);
                     Tmp.v1.set((float)(cx - this.width / 2), (float)(cy - this.height / 2)).rotate(180.0F + enemyOffset).add((float)(this.width / 2), (float)(this.height / 2));
-                    Room espawn = new Room((int)Tmp.v1.x, (int)Tmp.v1.y, this.rand.random(8, 16));
-                    roomseq.add(espawn);
-                    enemies.add(espawn);
+                    Room enemySpawn = new Room((int)Tmp.v1.x, (int)Tmp.v1.y, this.rand.random(8, 16));
+                    roomseq.add(enemySpawn);
+                    enemies.add(enemySpawn);
                 }
                 break;
             }
@@ -371,18 +371,18 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
         Seq<Block> ores = Seq.with(Blocks.oreCopper, Blocks.oreLead, MinventionBlocksEnvironment.oreIron);
         float poles = Math.abs(this.sector.tile.v.y);
-        float nmag = 0.5F;
+        float noiseMagnitude = 0.5F;
         float scl = 1.0F;
-        float addscl = 1.3F;
-        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.25F * addscl) {
+        float addScale = 1.3F;
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x, this.sector.tile.v.y, this.sector.tile.v.z) * noiseMagnitude + poles > 0.25F * addScale) {
             ores.add(Blocks.oreCoal);
         }
 
-        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 1.0F, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.5F * addscl) {
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 1.0F, this.sector.tile.v.y, this.sector.tile.v.z) * noiseMagnitude + poles > 0.5F * addScale) {
             ores.add(Blocks.oreTitanium);
         }
 
-        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 2.0F, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.7F * addscl) {
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 2.0F, this.sector.tile.v.y, this.sector.tile.v.z) * noiseMagnitude + poles > 0.7F * addScale) {
             ores.add(Blocks.oreThorium);
         }
 
@@ -575,12 +575,12 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
         Schematics.placeLaunchLoadout(spawn.x, spawn.y);
 
-        for(Room espawn : enemies) {
-            this.tiles.getn(espawn.x, espawn.y).setOverlay(Blocks.spawn);
+        for(Room enemySpawn : enemies) {
+            this.tiles.getn(enemySpawn.x, enemySpawn.y).setOverlay(Blocks.spawn);
         }
 
         if (this.sector.hasEnemyBase()) {
-            this.basegen.generate(this.tiles, enemies.map((r) -> this.tiles.getn(r.x, r.y)), this.tiles.get(spawn.x, spawn.y), Vars.state.rules.waveTeam, this.sector, difficulty);
+            this.baseGen.generate(this.tiles, enemies.map((r) -> this.tiles.getn(r.x, r.y)), this.tiles.get(spawn.x, spawn.y), Vars.state.rules.waveTeam, this.sector, difficulty);
             Vars.state.rules.attackMode = this.sector.info.attack = true;
         } else {
             Vars.state.rules.winWave = this.sector.info.winWave = 10 + 5 * (int)Math.max(difficulty * 10.0F, 1.0F);
@@ -596,7 +596,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     public void postGenerate(Tiles tiles) {
         if (this.sector.hasEnemyBase()) {
-            this.basegen.postGenerate();
+            this.baseGen.postGenerate();
             if (Vars.spawner.countGroundSpawns() == 0) {
                 Vars.state.rules.spawns = Waves.generate(this.sector.threat, new Rand(this.sector.id), Vars.state.rules.attackMode, true, false);
             }
