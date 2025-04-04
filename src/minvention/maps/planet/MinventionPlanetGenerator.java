@@ -151,7 +151,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             int x;
             int y;
             int radius;
-            ObjectSet<Room> connected = new ObjectSet();
+            ObjectSet<Room> connected = new ObjectSet<>();
 
             Room(int x, int y, int radius) {
                 this.x = x;
@@ -224,7 +224,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             }
         }
 
-        Seq<Room> roomseq = new Seq();
+        Seq<Room> roomseq = new Seq<>();
 
         for(int i = 0; i < rooms; ++i) {
             Tmp.v1.trns(this.rand.random(360.0F), this.rand.random(radius / constraint));
