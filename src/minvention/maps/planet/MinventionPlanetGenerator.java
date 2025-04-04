@@ -313,65 +313,6 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
 
         this.distort(10.0F, 6.0F);
-        Room finalSpawn = spawn;
-        this.pass((xx, yx) -> {
-            if (!this.block.solid) {
-                Vec3 v = this.sector.rect.project((float)xx, (float)yx);
-                float rr = Simplex.noise2d(this.sector.id, 2.0F, 0.6F, 0.14285715F, xx, yx) * 0.1F;
-                float value = Ridged.noise3d(2, v.x, v.y, v.z, 1, 0.018181818F) + rr - this.rawHeight(v) * 0.0F;
-                float rrScale = rr * 44.0F - 2.0F;
-                if (value > 0.17F && !Mathf.within((float)xx, (float)yx, (float) finalSpawn.x, (float) finalSpawn.y, 12.0F + rrScale)) {
-                    boolean deep = value > 0.27F && !Mathf.within((float)xx, (float)yx, (float) finalSpawn.x, (float) finalSpawn.y, 15.0F + rrScale);
-                    boolean spore = this.floor != Blocks.sand && this.floor != Blocks.salt;
-                    if (this.floor != Blocks.ice && this.floor != Blocks.iceSnow && this.floor != Blocks.snow && !this.floor.asFloor().isLiquid) {
-                        this.floor = spore ? (deep ? Blocks.taintedWater : Blocks.darksandTaintedWater) : (deep ? Blocks.water : (this.floor != Blocks.sand && this.floor != Blocks.salt ? Blocks.darksandWater : Blocks.sandWater));
-                    }
-                }
-
-            }
-        });
-        this.pass((xx, yx) -> {
-            int deepRadius = 3;
-            if (this.floor.asFloor().isLiquid && this.floor.asFloor().shallow) {
-                for(int cx = -deepRadius; cx <= deepRadius; ++cx) {
-                    for(int cy = -deepRadius; cy <= deepRadius; ++cy) {
-                        if (cx * cx + cy * cy <= deepRadius * deepRadius) {
-                            int wx = cx + xx;
-                            int wy = cy + yx;
-                            Tile tile = this.tiles.get(wx, wy);
-                            if (tile != null && (!tile.floor().isLiquid || tile.block() != Blocks.air)) {
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                this.floor = this.floor == Blocks.darksandTaintedWater ? Blocks.taintedWater : Blocks.water;
-            }
-
-        });
-        if (naval) {
-            int deepRadius = 2;
-            this.pass((xx, yx) -> {
-                if (this.floor.asFloor().isLiquid && !this.floor.asFloor().isDeep() && !this.floor.asFloor().shallow) {
-                    for(int cx = -deepRadius; cx <= deepRadius; ++cx) {
-                        for(int cy = -deepRadius; cy <= deepRadius; ++cy) {
-                            if (cx * cx + cy * cy <= deepRadius * deepRadius) {
-                                int wx = cx + xx;
-                                int wy = cy + yx;
-                                Tile tile = this.tiles.get(wx, wy);
-                                if (tile != null && (tile.floor().shallow || !tile.floor().isLiquid)) {
-                                    return;
-                                }
-                            }
-                        }
-                    }
-
-                    this.floor = this.floor == Blocks.water ? Blocks.deepwater : Blocks.taintedWater;
-                }
-
-            });
-        }
 
         Seq<Block> ores = Seq.with(Blocks.oreCopper, Blocks.oreLead, MinventionBlocksEnvironment.oreIron);
         float poles = Math.abs(this.sector.tile.v.y);
@@ -425,10 +366,6 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         this.inverseFloodFill(this.tiles.getn(spawn.x, spawn.y));
         this.tech();
         this.pass((xx, yx) -> {
-            if (this.floor == Blocks.sporeMoss && (double)Math.abs(0.5F - this.noise((float)(xx - 90), (float)yx, 4.0F, 0.8, 65.0F)) > 0.02) {
-                this.floor = Blocks.moss;
-            }
-
             if (this.floor == Blocks.darksand && Math.abs(0.5F - this.noise((float)(xx - 40), (float)yx, 2.0F, 0.7, 80.0F)) > 0.25F && Math.abs(0.5F - this.noise((float)xx, (float)(yx + this.sector.id * 10), 1.0F, 1.0F, 60.0F)) > 0.41F && !roomseq.contains((r) -> Mathf.within((float)xx, (float)yx, (float)r.x, (float)r.y, 30.0F))) {
                 this.floor = Blocks.tar;
             }
