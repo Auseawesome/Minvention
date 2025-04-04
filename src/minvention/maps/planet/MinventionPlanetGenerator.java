@@ -121,18 +121,26 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     //TODO: Fix this to allow for better weighting and block selection
     Block getBlock(Vec3 position) {
         float height = this.rawHeight(position);
-        Tmp.v31.set(position);
-        position = Tmp.v33.set(position).scl(this.scale);
-        Block[][] testTerrain = {{Blocks.basalt, Blocks.sand},{Blocks.water,Blocks.sporeMoss}};
-        double latitude = Math.asin(position.y/5)+Mathf.halfPi;
-        double longitude = Math.atan(position.z/position.x);
+        double temperature = 0f;
+        position.scl(this.scale);
+        Block[][] testTerrain = {{Blocks.basalt, Blocks.sand}, {Blocks.water, Blocks.sporeMoss}};
+        double latitude = Math.asin(position.y / 5) / Mathf.PI;
+        double poleDistance = 0.5 - Math.abs(latitude);
+        temperature += poleDistance;
+        temperature -= height;
+        latitude += 0.5;
+        double longitude = Math.atan(position.z / position.x) / Mathf.PI;
         if (position.x < 0) {
-            longitude += Mathf.pi;
-        } else if (position.z < 0){
-            longitude += Mathf.pi * 2;
+            longitude += 1;
+        } else if (position.z < 0) {
+            longitude += 2;
         }
-        Log.info(longitude);
-        return testTerrain[(int) Math.max(Math.min(Math.abs(Math.floor(latitude/Mathf.halfPi)%2) ,testTerrain.length-1),0)][(int) Math.max(Math.min(Math.abs(Math.floor(longitude/Mathf.halfPi)%2) ,testTerrain.length-1),0)];
+        Log.info(height);
+        Block block = testTerrain[(int) Math.max(Math.min(Math.abs(Math.floor(latitude * 2) % 2), testTerrain.length - 1), 0)][(int) Math.max(Math.min(Math.abs(Math.floor(longitude * 2) % 2), testTerrain.length - 1), 0)];
+        if (temperature < 0f) {
+            block = Blocks.snow;
+        }
+        return block;
     }
 
     protected float noise(float x, float y, double octaves, double falloff, double scale, double mag) {
