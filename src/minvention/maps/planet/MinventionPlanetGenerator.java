@@ -9,10 +9,8 @@ import arc.math.geom.Point2;
 import arc.math.geom.Vec2;
 import arc.math.geom.Vec3;
 import arc.struct.FloatSeq;
-import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
-import arc.util.Log;
 import arc.util.Structs;
 import arc.util.Tmp;
 import arc.util.noise.Noise;
@@ -101,7 +99,6 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         float height = this.rawHeight(position);
         double temperature = 0f;
         position.scl(this.scale);
-        Block[][] testTerrain = {{Blocks.basalt, Blocks.sand}, {Blocks.water, Blocks.sporeMoss}};
         double latitude = Math.asin(position.y / 5) / Mathf.PI;
         double poleDistance = 0.5 - Math.abs(latitude);
         temperature += poleDistance * poleDistance * 2.5;
