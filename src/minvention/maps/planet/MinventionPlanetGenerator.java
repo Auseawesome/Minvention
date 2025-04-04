@@ -126,7 +126,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         Block[][] testTerrain = {{Blocks.basalt, Blocks.sand}, {Blocks.water, Blocks.sporeMoss}};
         double latitude = Math.asin(position.y / 5) / Mathf.PI;
         double poleDistance = 0.5 - Math.abs(latitude);
-        temperature += poleDistance;
+        temperature += poleDistance * poleDistance * 2.5;
         temperature -= height;
         latitude += 0.5;
         double longitude = Math.atan(position.z / position.x) / Mathf.PI;
@@ -135,9 +135,27 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         } else if (position.z < 0) {
             longitude += 2;
         }
-        Log.info(height);
-        Block block = testTerrain[(int) Math.max(Math.min(Math.abs(Math.floor(latitude * 2) % 2), testTerrain.length - 1), 0)][(int) Math.max(Math.min(Math.abs(Math.floor(longitude * 2) % 2), testTerrain.length - 1), 0)];
-        if (temperature < 0f) {
+        Block block = Blocks.sand;
+        if (height < 0.175f) {
+            if (temperature < 0f) {
+                block = Blocks.ice;
+            } else if (temperature < 0.1f) {
+                block = Blocks.water;
+            } else {
+                block = Blocks.deepwater;
+            }
+        } else if (height < 0.25f) {
+            if (temperature < 0f) {
+                block = Blocks.ice;
+            } else {
+                block = Blocks.water;
+            }
+        } else if (height > 0.45f) {
+            block = Blocks.stone;
+        } else if (height > 0.325f) {
+            block = Blocks.grass;
+        }
+        if (temperature < -0.1f && height > 0.25) {
             block = Blocks.snow;
         }
         return block;
