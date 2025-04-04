@@ -43,30 +43,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     float scale = 5.0F;
     float waterOffset = 0.07F;
     boolean genLakes = false;
-    Block[][] blockArray;
-    ObjectMap<Block, Block> decoration;
-    ObjectMap<Block, Block> swapTargets;
-    float water;
 
     public MinventionPlanetGenerator() {
-        this.blockArray = new Block[][]{
-                {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass},
-                {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.sand, Blocks.sand, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.stone},
-                {Blocks.water, Blocks.darksandWater, Blocks.darksand, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.stone, Blocks.stone},
-                {Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.salt, Blocks.salt, Blocks.sand, Blocks.stone, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.iceSnow, Blocks.ice},
-                {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.salt, Blocks.sand, Blocks.sand, Blocks.basalt, Blocks.snow, Blocks.grass, Blocks.snow, Blocks.snow, Blocks.ice},
-                {Blocks.deepwater, Blocks.water, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.sand, Blocks.moss, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.snow, Blocks.ice},
-                {Blocks.deepwater, Blocks.sandWater, Blocks.sand, Blocks.sand, Blocks.moss, Blocks.moss, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice},
-                {Blocks.deepTaintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.moss, Blocks.basalt, Blocks.hotrock, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.moss, Blocks.sporeMoss, Blocks.snow, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.snow, Blocks.ice, Blocks.ice},
-                {Blocks.darksandWater, Blocks.darksand, Blocks.darksand, Blocks.sporeMoss, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice},
-                {Blocks.deepTaintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.sporeMoss, Blocks.sporeMoss, Blocks.ice, Blocks.ice, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                {Blocks.taintedWater, Blocks.darksandTaintedWater, Blocks.darksand, Blocks.sporeMoss, Blocks.moss, Blocks.sporeMoss, Blocks.iceSnow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                {Blocks.darksandWater, Blocks.darksand, Blocks.snow, Blocks.ice, Blocks.iceSnow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
-        };
-        this.decoration = ObjectMap.of(new Object[]{Blocks.sporeMoss, Blocks.sporeCluster, Blocks.moss, Blocks.sporeCluster, Blocks.taintedWater, Blocks.water, Blocks.darksandTaintedWater, Blocks.darksandWater});
-        this.swapTargets = ObjectMap.of(new Object[]{Blocks.sporeMoss, Blocks.shale, Blocks.moss, Blocks.shale});
-        this.water = 2.0F / (float)this.blockArray[0].length;
+
     }
 
     float rawHeight(Vec3 position) {
@@ -100,8 +79,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     }
 
     public float getHeight(Vec3 position) {
-        float height = this.rawHeight(position);
-        return Math.max(height, this.water);
+        return this.rawHeight(position);
     }
 
     public Color getColor(Vec3 position) {
@@ -510,7 +488,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             while(true) {
                 if (i >= 4) {
                     if (this.rand.chance(0.01) && this.floor.asFloor().hasSurface() && this.block == Blocks.air) {
-                        this.block = this.decoration.get(this.floor, this.floor.asFloor().decoration);
+                        // Used to be decoration placing code
                     }
                     break;
                 }
