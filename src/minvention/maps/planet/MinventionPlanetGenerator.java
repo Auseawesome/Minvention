@@ -71,7 +71,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     float rawHeight(Vec3 position) {
         position = Tmp.v33.set(position).scl(this.scl);
-        return (Mathf.pow(Simplex.noise3d(this.seed, (double)7.0F, (double)0.5F, (double)0.33333334F, (double)position.x, (double)position.y, (double)position.z), 2.3F) + this.waterOffset) / (1.0F + this.waterOffset);
+        return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F) + this.waterOffset) / (1.0F + this.waterOffset);
     }
 
     public void generateSector(Sector sector) {
@@ -112,7 +112,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     public void genTile(Vec3 position, TileGen tile) {
         tile.floor = this.getBlock(position);
         tile.block = tile.floor.asFloor().wall;
-        if ((double)Ridged.noise3d(this.seed + 1, (double)position.x, (double)position.y, (double)position.z, 2, 22.0F) > 0.31) {
+        if ((double)Ridged.noise3d(this.seed + 1, position.x, position.y, position.z, 2, 22.0F) > 0.31) {
             tile.block = Blocks.air;
         }
 
@@ -137,7 +137,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     protected float noise(float x, float y, double octaves, double falloff, double scl, double mag) {
         Vec3 v = this.sector.rect.project(x, y).scl(5.0F);
-        return Simplex.noise3d(this.seed, octaves, falloff, (double)1.0F / scl, (double)v.x, (double)v.y, (double)v.z) * (float)mag;
+        return Simplex.noise3d(this.seed, octaves, falloff, (double)1.0F / scl, v.x, v.y, v.z) * (float)mag;
     }
 
     protected void generate() {
@@ -163,7 +163,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             void join(int x1, int y1, int x2, int y2) {
                 float nscl = MinventionPlanetGenerator.this.rand.random(100.0F, 140.0F) * 6.0F;
                 int stroke = MinventionPlanetGenerator.this.rand.random(3, 9);
-                MinventionPlanetGenerator.this.brush(MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (tile.solid() ? 50.0F : 0.0F) + MinventionPlanetGenerator.this.noise((float)tile.x, (float)tile.y, (double)2.0F, (double)0.4F, (double)(1.0F / nscl)) * 500.0F, Astar.manhattan), stroke);
+                MinventionPlanetGenerator.this.brush(MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (tile.solid() ? 50.0F : 0.0F) + MinventionPlanetGenerator.this.noise(tile.x, tile.y, 2.0F, 0.4F, (1.0F / nscl)) * 500.0F, Astar.manhattan), stroke);
             }
 
             void connect(Room to) {
@@ -171,7 +171,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                     Vec2 midpoint = Tmp.v1.set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
                     MinventionPlanetGenerator.this.rand.nextFloat();
                     if (MinventionPlanetGenerator.alt) {
-                        midpoint.add(Tmp.v2.set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (MinventionPlanetGenerator.this.rand.chance((double)0.5F) ? 1.0F : -1.0F)).scl(Tmp.v1.dst((float)this.x, (float)this.y) * 2.0F));
+                        midpoint.add(Tmp.v2.set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (MinventionPlanetGenerator.this.rand.chance(0.5F) ? 1.0F : -1.0F)).scl(Tmp.v1.dst((float)this.x, (float)this.y) * 2.0F));
                     } else {
                         midpoint.add(Tmp.v2.setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(Tmp.v1.dst((float)this.x, (float)this.y)));
                     }
@@ -188,9 +188,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                 float nscl = MinventionPlanetGenerator.this.rand.random(100.0F, 140.0F) * 6.0F;
                 int rad = MinventionPlanetGenerator.this.rand.random(7, 11);
                 int avoid = 2 + rad;
-                Seq<Tile> path = MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (!tile.solid() && tile.floor().isLiquid ? 0.0F : 70.0F) + MinventionPlanetGenerator.this.noise((float)tile.x, (float)tile.y, (double)2.0F, (double)0.4F, (double)(1.0F / nscl)) * 500.0F, Astar.manhattan);
+                Seq<Tile> path = MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (!tile.solid() && tile.floor().isLiquid ? 0.0F : 70.0F) + MinventionPlanetGenerator.this.noise(tile.x, tile.y, 2.0F, 0.4F, 1.0F / nscl) * 500.0F, Astar.manhattan);
                 path.each((t) -> {
-                    if (!(Mathf.dst2((float)t.x, (float)t.y, (float)x2, (float)y2) <= (float)(avoid * avoid))) {
+                    if (!(Mathf.dst2(t.x, t.y, (float)x2, (float)y2) <= (float)(avoid * avoid))) {
                         for(int x = -rad; x <= rad; ++x) {
                             for(int y = -rad; y <= rad; ++y) {
                                 int wx = t.x + x;
@@ -279,7 +279,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         int connections = this.rand.random(Math.max(rooms - 1, 1), rooms + 3);
 
         for(int i = 0; i < connections; ++i) {
-            ((Room)roomseq.random(this.rand)).connect((Room)roomseq.random(this.rand));
+            roomseq.random(this.rand).connect(roomseq.random(this.rand));
         }
 
         for(Room room : roomseq) {
@@ -313,8 +313,8 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         this.pass((xx, yx) -> {
             if (!this.block.solid) {
                 Vec3 v = this.sector.rect.project((float)xx, (float)yx);
-                float rr = Simplex.noise2d(this.sector.id, (double)2.0F, (double)0.6F, (double)0.14285715F, (double)xx, (double)yx) * 0.1F;
-                float value = Ridged.noise3d(2, (double)v.x, (double)v.y, (double)v.z, 1, 0.018181818F) + rr - this.rawHeight(v) * 0.0F;
+                float rr = Simplex.noise2d(this.sector.id, 2.0F, 0.6F, 0.14285715F, xx, yx) * 0.1F;
+                float value = Ridged.noise3d(2, v.x, v.y, v.z, 1, 0.018181818F) + rr - this.rawHeight(v) * 0.0F;
                 float rrscl = rr * 44.0F - 2.0F;
                 if (value > 0.17F && !Mathf.within((float)xx, (float)yx, (float) finalSpawn.x, (float) finalSpawn.y, 12.0F + rrscl)) {
                     boolean deep = value > 0.27F && !Mathf.within((float)xx, (float)yx, (float) finalSpawn.x, (float) finalSpawn.y, 15.0F + rrscl);
@@ -374,19 +374,19 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         float nmag = 0.5F;
         float scl = 1.0F;
         float addscl = 1.3F;
-        if (Simplex.noise3d(this.seed, (double)2.0F, (double)0.5F, (double)scl, (double)this.sector.tile.v.x, (double)this.sector.tile.v.y, (double)this.sector.tile.v.z) * nmag + poles > 0.25F * addscl) {
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.25F * addscl) {
             ores.add(Blocks.oreCoal);
         }
 
-        if (Simplex.noise3d(this.seed, (double)2.0F, (double)0.5F, (double)scl, (double)(this.sector.tile.v.x + 1.0F), (double)this.sector.tile.v.y, (double)this.sector.tile.v.z) * nmag + poles > 0.5F * addscl) {
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 1.0F, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.5F * addscl) {
             ores.add(Blocks.oreTitanium);
         }
 
-        if (Simplex.noise3d(this.seed, (double)2.0F, (double)0.5F, (double)scl, (double)(this.sector.tile.v.x + 2.0F), (double)this.sector.tile.v.y, (double)this.sector.tile.v.z) * nmag + poles > 0.7F * addscl) {
+        if (Simplex.noise3d(this.seed, 2.0F, 0.5F, scl, this.sector.tile.v.x + 2.0F, this.sector.tile.v.y, this.sector.tile.v.z) * nmag + poles > 0.7F * addscl) {
             ores.add(Blocks.oreThorium);
         }
 
-        if (this.rand.chance((double)0.25F)) {
+        if (this.rand.chance(0.25F)) {
             ores.add(Blocks.oreScrap);
         }
 
@@ -402,9 +402,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                 int offsetY = yx + 23;
 
                 for(int i = ores.size - 1; i >= 0; --i) {
-                    Block entry = (Block)ores.get(i);
+                    Block entry = ores.get(i);
                     float freq = frequencies.get(i);
-                    if ((double)Math.abs(0.5F - this.noise((float)offsetX, (float)(offsetY + i * 999), (double)2.0F, 0.7, (double)(40 + i * 2))) > (double)0.22F + (double)i * 0.01 && Math.abs(0.5F - this.noise((float)offsetX, (float)(offsetY - i * 999), (double)1.0F, (double)1.0F, (double)(30 + i * 4))) > 0.37F + freq) {
+                    if ((double)Math.abs(0.5F - this.noise((float)offsetX, (float)(offsetY + i * 999), 2.0F, 0.7, 40 + i * 2)) > (double)0.22F + (double)i * 0.01 && Math.abs(0.5F - this.noise((float)offsetX, (float)(offsetY - i * 999), 1.0F, 1.0F, 30 + i * 4)) > 0.37F + freq) {
                         this.ore = entry;
                         break;
                     }
@@ -421,16 +421,16 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         this.inverseFloodFill(this.tiles.getn(spawn.x, spawn.y));
         this.tech();
         this.pass((xx, yx) -> {
-            if (this.floor == Blocks.sporeMoss && (double)Math.abs(0.5F - this.noise((float)(xx - 90), (float)yx, (double)4.0F, 0.8, (double)65.0F)) > 0.02) {
+            if (this.floor == Blocks.sporeMoss && (double)Math.abs(0.5F - this.noise((float)(xx - 90), (float)yx, 4.0F, 0.8, 65.0F)) > 0.02) {
                 this.floor = Blocks.moss;
             }
 
-            if (this.floor == Blocks.darksand && Math.abs(0.5F - this.noise((float)(xx - 40), (float)yx, (double)2.0F, 0.7, (double)80.0F)) > 0.25F && Math.abs(0.5F - this.noise((float)xx, (float)(yx + this.sector.id * 10), (double)1.0F, (double)1.0F, (double)60.0F)) > 0.41F && !roomseq.contains((r) -> Mathf.within((float)xx, (float)yx, (float)r.x, (float)r.y, 30.0F))) {
+            if (this.floor == Blocks.darksand && Math.abs(0.5F - this.noise((float)(xx - 40), (float)yx, 2.0F, 0.7, 80.0F)) > 0.25F && Math.abs(0.5F - this.noise((float)xx, (float)(yx + this.sector.id * 10), 1.0F, 1.0F, 60.0F)) > 0.41F && !roomseq.contains((r) -> Mathf.within((float)xx, (float)yx, (float)r.x, (float)r.y, 30.0F))) {
                 this.floor = Blocks.tar;
             }
 
             if (this.floor == Blocks.hotrock) {
-                if ((double)Math.abs(0.5F - this.noise((float)(xx - 90), (float)yx, (double)4.0F, 0.8, (double)80.0F)) > 0.035) {
+                if ((double)Math.abs(0.5F - this.noise((float)(xx - 90), (float)yx, 4.0F, 0.8, 80.0F)) > 0.035) {
                     this.floor = Blocks.basalt;
                 } else {
                     this.ore = Blocks.air;
@@ -448,7 +448,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                     }
                 }
             } else if (this.genLakes && this.floor != Blocks.basalt && this.floor != Blocks.ice && this.floor.asFloor().hasSurface()) {
-                float noise = this.noise((float)(xx + 782), (float)yx, (double)5.0F, (double)0.75F, (double)260.0F, (double)1.0F);
+                float noise = this.noise((float)(xx + 782), (float)yx, 5.0F, 0.75F, 260.0F, 1.0F);
                 if (noise > 0.67F && !roomseq.contains((e) -> Mathf.within((float)xx, (float)yx, (float)e.x, (float)e.y, 14.0F))) {
                     if (noise > 0.72F) {
                         this.floor = noise > 0.78F ? Blocks.taintedWater : (this.floor == Blocks.sand ? Blocks.sandWater : Blocks.darksandTaintedWater);
@@ -472,7 +472,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                 }
 
                 if (any && (this.block == Blocks.snowWall || this.block == Blocks.iceWall || all && this.block == Blocks.air && this.floor == Blocks.snow && this.rand.chance(0.03))) {
-                    this.block = this.rand.chance((double)0.5F) ? Blocks.whiteTree : Blocks.whiteTreeDead;
+                    this.block = this.rand.chance(0.5F) ? Blocks.whiteTree : Blocks.whiteTreeDead;
                 }
             }
 
@@ -481,7 +481,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             while(true) {
                 if (i >= 4) {
                     if (this.rand.chance(0.01) && this.floor.asFloor().hasSurface() && this.block == Blocks.air) {
-                        this.block = (Block)this.dec.get(this.floor, this.floor.asFloor().decoration);
+                        this.block = this.dec.get(this.floor, this.floor.asFloor().decoration);
                     }
                     break;
                 }
@@ -524,11 +524,11 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                     Tile tile = this.tiles.getn(x, y);
                     BaseRegistry.BasePart part = null;
                     if (tile.overlay().itemDrop != null) {
-                        part = (BaseRegistry.BasePart)Vars.bases.forResource(tile.drop()).getFrac(range);
+                        part = Vars.bases.forResource(tile.drop()).getFrac(range);
                     } else if (tile.floor().liquidDrop != null && this.rand.chance(0.05)) {
-                        part = (BaseRegistry.BasePart)Vars.bases.forResource(tile.floor().liquidDrop).getFrac(range);
+                        part = Vars.bases.forResource(tile.floor().liquidDrop).getFrac(range);
                     } else if (this.rand.chance(0.05)) {
-                        part = (BaseRegistry.BasePart)Vars.bases.parts.getFrac(range);
+                        part = Vars.bases.parts.getFrac(range);
                     }
 
                     if (part != null && BaseGenerator.tryPlace(part, x, y, Team.derelict, (cx, cy) -> {
@@ -554,9 +554,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                             float removeChance = Mathf.lerp(0.05F, 0.5F, dst / (float)debrisRadius);
                             Tile other = this.tiles.getn(cx, cy);
                             if (other.build != null && other.isCenter()) {
-                                if (other.team() == Team.derelict && this.rand.chance((double)removeChance)) {
+                                if (other.team() == Team.derelict && this.rand.chance(removeChance)) {
                                     other.remove();
-                                } else if (this.rand.chance((double)0.5F)) {
+                                } else if (this.rand.chance(0.5F)) {
                                     other.build.health -= this.rand.random(other.build.health * 0.9F);
                                 }
                             }
@@ -591,14 +591,14 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         Vars.state.rules.waves = true;
         Vars.state.rules.env = this.sector.planet.defaultEnv;
         Vars.state.rules.enemyCoreBuildRadius = 600.0F;
-        Vars.state.rules.spawns = Waves.generate(difficulty, new Rand((long)this.sector.id), Vars.state.rules.attackMode, Vars.state.rules.attackMode && Vars.spawner.countGroundSpawns() == 0, naval);
+        Vars.state.rules.spawns = Waves.generate(difficulty, new Rand(this.sector.id), Vars.state.rules.attackMode, Vars.state.rules.attackMode && Vars.spawner.countGroundSpawns() == 0, naval);
     }
 
     public void postGenerate(Tiles tiles) {
         if (this.sector.hasEnemyBase()) {
             this.basegen.postGenerate();
             if (Vars.spawner.countGroundSpawns() == 0) {
-                Vars.state.rules.spawns = Waves.generate(this.sector.threat, new Rand((long)this.sector.id), Vars.state.rules.attackMode, true, false);
+                Vars.state.rules.spawns = Waves.generate(this.sector.threat, new Rand(this.sector.id), Vars.state.rules.attackMode, true, false);
             }
         }
 
