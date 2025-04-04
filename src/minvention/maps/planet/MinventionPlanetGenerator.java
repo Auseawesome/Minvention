@@ -148,10 +148,10 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         int rooms = this.rand.random(2, 5);
 
         class Room {
-            int x;
-            int y;
-            int radius;
-            ObjectSet<Room> connected = new ObjectSet<>();
+            final int x;
+            final int y;
+            final int radius;
+            final ObjectSet<Room> connected = new ObjectSet<>();
 
             Room(int x, int y, int radius) {
                 this.x = x;
@@ -236,7 +236,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
 
         Room spawn = null;
-        Seq<Room> enemies = new Seq();
+        Seq<Room> enemies = new Seq<>();
         int enemySpawns = this.rand.random(1, Math.max((int)(this.sector.threat * 4.0F), 1));
         int offset = this.rand.nextInt(360);
         float length = (float)this.width / 2.55F - (float)this.rand.random(13, 23);
@@ -369,7 +369,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             });
         }
 
-        Seq<Block> ores = Seq.with(new Block[]{Blocks.oreCopper, Blocks.oreLead, MinventionBlocksEnvironment.oreIron});
+        Seq<Block> ores = Seq.with(Blocks.oreCopper, Blocks.oreLead, MinventionBlocksEnvironment.oreIron);
         float poles = Math.abs(this.sector.tile.v.y);
         float nmag = 0.5F;
         float scl = 1.0F;
