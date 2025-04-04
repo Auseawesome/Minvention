@@ -111,7 +111,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             longitude += 2;
         }
         Block block = Blocks.sand;
-        if (height < 0.175f) {
+        if (height < 0.1f) {
             if (temperature < 0f) {
                 block = Blocks.ice;
             } else if (temperature < 0.1f) {
@@ -119,11 +119,20 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             } else {
                 block = Blocks.deepwater;
             }
-        } else if (height < 0.25f) {
-            if (temperature < 0f) {
+        } else if (height < 0.175f) {
+            if (temperature < 0.0f) {
                 block = Blocks.ice;
+            } else if (temperature < 0.1f) {
+                //TODO: Make iceWater or similar
+                block = Blocks.sandWater;
             } else {
                 block = Blocks.water;
+            }
+        } else if (height < 0.25f) {
+            if (temperature < 0.1f) {
+                block = Blocks.ice;
+            } else {
+                block = Blocks.sandWater;
             }
         } else if (height > 0.45f) {
             block = Blocks.stone;
@@ -305,7 +314,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             }
         }
 
-        boolean naval = (float)waters / (float)total >= 0.19F;
+        boolean naval = (float)waters / (float)total >= 0.25F;
         if (naval) {
             for(Room room : enemies) {
                 room.connectLiquid(spawn);
