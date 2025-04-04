@@ -36,8 +36,10 @@ import mindustry.world.blocks.environment.Floor;
 import minvention.content.blocks.MinventionBlocksEnvironment;
 
 public class MinventionPlanetGenerator extends PlanetGenerator {
+    //TODO: Figure out purpose of this static boolean, assuming it means alternate but unsure what it actually does
     public static boolean alt = false;
     BaseGenerator baseGen = new BaseGenerator();
+    //TODO: Figure out purpose of this scale variable
     float scale = 5.0F;
     boolean genLakes = false;
 
@@ -46,10 +48,12 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     }
 
     float rawHeight(Vec3 position) {
+        //TODO: Figure out purpose of this temporary variable to try to eliminate it
         position = Tmp.v33.set(position).scl(this.scale);
         return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F));
     }
 
+    //TODO: Update enemy base logic to prefer certain locations and to stop them generating as much in watery sectors
     public void generateSector(Sector sector) {
         if (sector.id != 154 && sector.id != 0) {
             PlanetGrid.Ptile tile = sector.tile;
@@ -75,15 +79,18 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
     }
 
+    //TODO: Probably get rid of this function as it no longer serves much of a purpose
     public float getHeight(Vec3 position) {
         return this.rawHeight(position);
     }
 
+    //TODO: Probably look at ice's colour and maybe remove ternary statement blocking salt from being shown
     public Color getColor(Vec3 position) {
         Block block = this.getBlock(position);
         return block == Blocks.salt ? Blocks.sand.mapColor : Tmp.c1.set(block.mapColor).a(1.0F - block.albedo);
     }
 
+    //TODO: Update logic for placing walls, allow for more open sector generation
     public void genTile(Vec3 position, TileGen tile) {
         tile.floor = this.getBlock(position);
         tile.block = tile.floor.asFloor().wall;
@@ -92,7 +99,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         }
 
     }
-    Block freezeWater(Block defaultWater, Block shallowWater, Block frozenWater, double temperature) {
+
+    // Just returns whether water should be made shallower or frozen based off an if statement since this logic was repeated many times
+    public static Block freezeWater(Block defaultWater, Block shallowWater, Block frozenWater, double temperature) {
         if (temperature < 0f) {
             return frozenWater;
         }
@@ -105,21 +114,29 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     //TODO: Fix this to allow for better weighting and block selection
     Block getBlock(Vec3 position) {
         float height = this.rawHeight(position);
-        double temperature = 0f;
-        position.scl(this.scale);
-        double latitude = Math.asin(position.y / 5) / Mathf.PI;
+        // Calculate latitude ranging from -0.5 to 0.5 using inverse sin, hypotenuse is the radius which is 1 so no division is needed
+        double latitude = Math.asin(position.y) / Mathf.PI;
+        // Subtract absolute attitude from 0.5 to get poleDistance starting at 0 at poles and ranging to 0.5 at the equator
         double poleDistance = 0.5 - Math.abs(latitude);
-        height *= (float) (1.1 - poleDistance/2);
-        temperature += poleDistance * poleDistance * 2.5;
-        temperature -= height;
+        // Adds 0.5 to the latitude to change it from ranging from 0 to 1
         latitude += 0.5;
+        // Scale height based on distance from poles to create more oceans near the equator and mountainous poles
+        height *= (float) (1.1 - poleDistance/2);
+        // Set temperature based on square of the distance from the poles, max value of temperature becomes 0.625
+        double temperature = poleDistance * poleDistance * 2.5;
+        // Height subtracted from temperature, should always lower the temperature to make poles and some peaks negative while most places remain in the low positives
+        temperature -= height;
+        // Longitude calculated using the inverse tangent of the z coordinate over the x coordinate. Ranges between 0.5 and 0.5
         double longitude = Math.atan(position.z / position.x) / Mathf.PI;
+        // Shifts longitude to ranging from 0 to 2. Represents radians without the Pi component to make math easier
         if (position.x < 0) {
             longitude += 1;
         } else if (position.z < 0) {
             longitude += 2;
         }
-        Block block = Blocks.stone;
+        // Default block of sand for midranges
+        Block block = Blocks.sand;
+        // Create water at low elevations, grass at mid and stone at high. Water freezes at low temperatures and is made shallow at mid-low temperatures to aid transitions
         if (height < 0.1f) {
             block = freezeWater(Blocks.deepwater, Blocks.water, Blocks.ice, temperature);
         } else if (height < 0.175f) {
@@ -131,17 +148,20 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         } else if (height > 0.325f) {
             block = Blocks.grass;
         }
+        // If the temperature is low and the height is above water level, snow will cover the terrain
         if (temperature < -0.1f && height > 0.25) {
             block = Blocks.snow;
         }
         return block;
     }
 
+    //TODO: Figure out what exactly the project method is doing, maybe adjust the noise too
     protected float noise(float x, float y, double octaves, double falloff, double scale, double mag) {
         Vec3 v = this.sector.rect.project(x, y).scl(5.0F);
         return Simplex.noise3d(this.seed, octaves, falloff, (double)1.0F / scale, v.x, v.y, v.z) * (float)mag;
     }
 
+    //TODO: Completely rewrite this method to add patches of interest and remove features that cut through terrain too much
     protected void generate() {
         this.cells(4);
         this.distort(10.0F, 12.0F);
@@ -213,7 +233,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
                     }
                 });
             }
-
+            //TODO: Figure out how to make this organic and better looking
             void connectLiquid(Room to) {
                 if (to != this) {
                     Vec2 midpoint = Tmp.v1.set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
