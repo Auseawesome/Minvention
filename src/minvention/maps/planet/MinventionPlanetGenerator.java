@@ -39,7 +39,6 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     public static boolean alt = false;
     BaseGenerator baseGen = new BaseGenerator();
     float scale = 5.0F;
-    float waterOffset = 0.07F;
     boolean genLakes = false;
 
     public MinventionPlanetGenerator() {
@@ -48,7 +47,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     float rawHeight(Vec3 position) {
         position = Tmp.v33.set(position).scl(this.scale);
-        return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F) + this.waterOffset) / (1.0F + this.waterOffset);
+        return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F));
     }
 
     public void generateSector(Sector sector) {
@@ -101,6 +100,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         position.scl(this.scale);
         double latitude = Math.asin(position.y / 5) / Mathf.PI;
         double poleDistance = 0.5 - Math.abs(latitude);
+        height *= (float) (1.1 - poleDistance/2);
         temperature += poleDistance * poleDistance * 2.5;
         temperature -= height;
         latitude += 0.5;
