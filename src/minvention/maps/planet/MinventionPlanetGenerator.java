@@ -250,8 +250,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
         Seq<Room> roomseq = new Seq<>();
 
         for(int i = 0; i < rooms; ++i) {
-            Vec2 randomVec = Vec2.ZERO;
-            randomVec.trns(this.rand.random(360.0F), this.rand.random(radius / constraint));
+            Vec2 randomVec = new Vec2().trns(this.rand.random(360.0F), this.rand.random(radius / constraint));
             float rx = (float)this.width / 2.0F + randomVec.x;
             float ry = (float)this.height / 2.0F + randomVec.y;
             // I think this is the max radius
