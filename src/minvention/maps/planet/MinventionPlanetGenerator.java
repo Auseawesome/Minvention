@@ -48,8 +48,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     }
 
     float rawHeight(Vec3 position) {
-        //TODO: Figure out purpose of this temporary variable to try to eliminate it
-        position = Tmp.v33.set(position).scl(this.scale);
+        position = new Vec3().set(position).scl(this.scale);
         return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F));
     }
 
