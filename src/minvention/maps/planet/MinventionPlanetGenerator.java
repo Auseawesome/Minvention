@@ -38,7 +38,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     //TODO: Figure out purpose of this static boolean, assuming it means alternate but unsure what it actually does
     public static boolean alt = false;
     BaseGenerator baseGen = new BaseGenerator();
-    float heightNoiseScale = 5.0F;
+    float noiseScale = 5.0F;
     boolean genLakes = false;
 
     public MinventionPlanetGenerator() {
@@ -46,7 +46,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     }
 
     float rawHeight(Vec3 position) {
-        position = new Vec3().set(position).scl(this.heightNoiseScale);
+        position = new Vec3().set(position).scl(this.noiseScale);
         return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F));
     }
 
@@ -154,7 +154,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     //TODO: Figure out what exactly the project method is doing, maybe adjust the noise too
     protected float noise(float x, float y, double octaves, double falloff, double scale, double mag) {
-        Vec3 v = this.sector.rect.project(x, y).scl(5.0F);
+        Vec3 v = this.sector.rect.project(x, y).scl(this.noiseScale);
         return Simplex.noise3d(this.seed, octaves, falloff, (double)1.0F / scale, v.x, v.y, v.z) * (float)mag;
     }
 
