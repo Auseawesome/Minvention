@@ -12,7 +12,6 @@ import arc.struct.FloatSeq;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
 import arc.util.Structs;
-import arc.util.Tmp;
 import arc.util.noise.Noise;
 import arc.util.noise.Ridged;
 import arc.util.noise.Simplex;
@@ -86,7 +85,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
     //TODO: Probably look at ice's colour and maybe remove ternary statement blocking salt from being shown
     public Color getColor(Vec3 position) {
         Block block = this.getBlock(position);
-        return block == Blocks.salt ? Blocks.sand.mapColor : Tmp.c1.set(block.mapColor).a(1.0F - block.albedo);
+        return block == Blocks.salt ? Blocks.sand.mapColor : new Color().set(block.mapColor).a(1.0F - block.albedo);
     }
 
     //TODO: Update logic for placing walls, allow for more open sector generation
@@ -190,12 +189,12 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
             void connect(Room to) {
                 if (this.connected.add(to) && to != this) {
-                    Vec2 midpoint = Tmp.v1.set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
+                    Vec2 midpoint = new Vec2().set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
                     MinventionPlanetGenerator.this.rand.nextFloat();
                     if (MinventionPlanetGenerator.alt) {
-                        midpoint.add(Tmp.v2.set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (MinventionPlanetGenerator.this.rand.chance(0.5F) ? 1.0F : -1.0F)).scl(Tmp.v1.dst((float)this.x, (float)this.y) * 2.0F));
+                        midpoint.add(new Vec2().set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (MinventionPlanetGenerator.this.rand.chance(0.5F) ? 1.0F : -1.0F)).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y) * 2.0F));
                     } else {
-                        midpoint.add(Tmp.v2.setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(Tmp.v1.dst((float)this.x, (float)this.y)));
+                        midpoint.add(new Vec2().setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
                     }
 
                     midpoint.sub((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F).limit((float)MinventionPlanetGenerator.this.width / 2.0F / Mathf.sqrt3).add((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F);
@@ -235,9 +234,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             //TODO: Figure out how to make this organic and better looking
             void connectLiquid(Room to) {
                 if (to != this) {
-                    Vec2 midpoint = Tmp.v1.set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
+                    Vec2 midpoint = new Vec2().set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
                     MinventionPlanetGenerator.this.rand.nextFloat();
-                    midpoint.add(Tmp.v2.setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(Tmp.v1.dst((float)this.x, (float)this.y)));
+                    midpoint.add(new Vec2().setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
                     midpoint.sub((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F).limit((float)MinventionPlanetGenerator.this.width / 2.0F / Mathf.sqrt3).add((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F);
                     int mx = (int)midpoint.x;
                     int my = (int)midpoint.y;
@@ -287,8 +286,8 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
                 for(int j = 0; j < enemySpawns; ++j) {
                     float enemyOffset = this.rand.range(60.0F);
-                    Tmp.v1.set((float)(cx - this.width / 2), (float)(cy - this.height / 2)).rotate(180.0F + enemyOffset).add((float)(this.width / 2), (float)(this.height / 2));
-                    Room enemySpawn = new Room((int)Tmp.v1.x, (int)Tmp.v1.y, this.rand.random(8, 16));
+                    Vec2 enemySpawnPos = new Vec2().set((float)(cx - this.width / 2), (float)(cy - this.height / 2)).rotate(180.0F + enemyOffset).add((float)(this.width / 2), (float)(this.height / 2));
+                    Room enemySpawn = new Room((int)enemySpawnPos.x, (int)enemySpawnPos.y, this.rand.random(8, 16));
                     roomseq.add(enemySpawn);
                     enemies.add(enemySpawn);
                 }
