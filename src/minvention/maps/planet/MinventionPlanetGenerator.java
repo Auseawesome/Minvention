@@ -181,22 +181,22 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
             void join(int x1, int y1, int x2, int y2) {
                 // I'm pretty sure this is supposed to be noiseScale
-                float noiseScale = MinventionPlanetGenerator.this.rand.random(100.0F, 140.0F) * 6.0F;
-                int stroke = MinventionPlanetGenerator.this.rand.random(3, 9);
-                MinventionPlanetGenerator.this.brush(MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (tile.solid() ? 50.0F : 0.0F) + MinventionPlanetGenerator.this.noise(tile.x, tile.y, 2.0F, 0.4F, (1.0F / noiseScale)) * 500.0F, Astar.manhattan), stroke);
+                float noiseScale = rand.random(100.0F, 140.0F) * 6.0F;
+                int stroke = rand.random(3, 9);
+                brush(pathfind(x1, y1, x2, y2, (tile) -> (tile.solid() ? 50.0F : 0.0F) + noise(tile.x, tile.y, 2.0F, 0.4F, (1.0F / noiseScale)) * 500.0F, Astar.manhattan), stroke);
             }
 
             void connect(Room to) {
                 if (this.connected.add(to) && to != this) {
                     Vec2 midpoint = new Vec2().set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
-                    MinventionPlanetGenerator.this.rand.nextFloat();
+                    rand.nextFloat();
                     if (MinventionPlanetGenerator.alt) {
-                        midpoint.add(new Vec2().set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (MinventionPlanetGenerator.this.rand.chance(0.5F) ? 1.0F : -1.0F)).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y) * 2.0F));
+                        midpoint.add(new Vec2().set(1.0F, 0.0F).setAngle(Angles.angle((float)to.x, (float)to.y, (float)this.x, (float)this.y) + 90.0F * (rand.chance(0.5F) ? 1.0F : -1.0F)).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y) * 2.0F));
                     } else {
-                        midpoint.add(new Vec2().setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
+                        midpoint.add(new Vec2().setToRandomDirection(rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
                     }
 
-                    midpoint.sub((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F).limit((float)MinventionPlanetGenerator.this.width / 2.0F / Mathf.sqrt3).add((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F);
+                    midpoint.sub((float)width / 2.0F, (float)height / 2.0F).limit((float)width / 2.0F / Mathf.sqrt3).add((float)width / 2.0F, (float)height / 2.0F);
                     int mx = (int)midpoint.x;
                     int my = (int)midpoint.y;
                     this.join(this.x, this.y, mx, my);
@@ -206,18 +206,18 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
             void joinLiquid(int x1, int y1, int x2, int y2) {
                 // I'm pretty sure this is supposed to be noiseScale
-                float noiseScale = MinventionPlanetGenerator.this.rand.random(100.0F, 140.0F) * 6.0F;
-                int rad = MinventionPlanetGenerator.this.rand.random(7, 11);
+                float noiseScale = rand.random(100.0F, 140.0F) * 6.0F;
+                int rad = rand.random(7, 11);
                 int avoid = 2 + rad;
-                Seq<Tile> path = MinventionPlanetGenerator.this.pathfind(x1, y1, x2, y2, (tile) -> (!tile.solid() && tile.floor().isLiquid ? 0.0F : 70.0F) + MinventionPlanetGenerator.this.noise(tile.x, tile.y, 2.0F, 0.4F, 1.0F / noiseScale) * 500.0F, Astar.manhattan);
+                Seq<Tile> path = pathfind(x1, y1, x2, y2, (tile) -> (!tile.solid() && tile.floor().isLiquid ? 0.0F : 70.0F) + noise(tile.x, tile.y, 2.0F, 0.4F, 1.0F / noiseScale) * 500.0F, Astar.manhattan);
                 path.each((t) -> {
                     if (!(Mathf.dst2(t.x, t.y, (float)x2, (float)y2) <= (float)(avoid * avoid))) {
                         for(int x = -rad; x <= rad; ++x) {
                             for(int y = -rad; y <= rad; ++y) {
                                 int wx = t.x + x;
                                 int wy = t.y + y;
-                                if (Structs.inBounds(wx, wy, MinventionPlanetGenerator.this.width, MinventionPlanetGenerator.this.height) && Mathf.within((float)x, (float)y, (float)rad)) {
-                                    Tile other = MinventionPlanetGenerator.this.tiles.getn(wx, wy);
+                                if (Structs.inBounds(wx, wy, width, height) && Mathf.within((float)x, (float)y, (float)rad)) {
+                                    Tile other = tiles.getn(wx, wy);
                                     other.setBlock(Blocks.air);
                                     if (Mathf.within((float)x, (float)y, (float)(rad - 1)) && !other.floor().isLiquid) {
                                         Floor floor = other.floor();
@@ -234,9 +234,9 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
             void connectLiquid(Room to) {
                 if (to != this) {
                     Vec2 midpoint = new Vec2().set((float)to.x, (float)to.y).add((float)this.x, (float)this.y).scl(0.5F);
-                    MinventionPlanetGenerator.this.rand.nextFloat();
-                    midpoint.add(new Vec2().setToRandomDirection(MinventionPlanetGenerator.this.rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
-                    midpoint.sub((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F).limit((float)MinventionPlanetGenerator.this.width / 2.0F / Mathf.sqrt3).add((float)MinventionPlanetGenerator.this.width / 2.0F, (float)MinventionPlanetGenerator.this.height / 2.0F);
+                    rand.nextFloat();
+                    midpoint.add(new Vec2().setToRandomDirection(rand).scl(new Vec2().set(midpoint).dst((float)this.x, (float)this.y)));
+                    midpoint.sub((float)width / 2.0F, (float)height / 2.0F).limit((float)width / 2.0F / Mathf.sqrt3).add((float)width / 2.0F, (float)height / 2.0F);
                     int mx = (int)midpoint.x;
                     int my = (int)midpoint.y;
                     this.joinLiquid(this.x, this.y, mx, my);
