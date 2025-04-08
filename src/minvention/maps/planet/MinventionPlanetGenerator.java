@@ -45,6 +45,7 @@ public class MinventionPlanetGenerator extends PlanetGenerator {
 
     }
 
+    //TODO: Try to remove seam
     float rawHeight(Vec3 position) {
         position = new Vec3().set(position).scl(this.noiseScale);
         return (Mathf.pow(Simplex.noise3d(this.seed, 7.0F, 0.5F, 0.33333334F, position.x, position.y, position.z), 2.3F));
